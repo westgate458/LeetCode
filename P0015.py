@@ -11,29 +11,61 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        
         l = len(nums)
+        # sort the list in ascending order for faster searching
         nums.sort()
+        # set initial answer set to empty
         ans = []
+        # set previous 1st number to NaN
         num_1 = float('nan')
+        
+        # try the first (l-2) numbers as the 1st number in summation
+        # since the list is sorted, the numbers in the summation triplet
+        # satisfy num_1 <= num_2 <= num_3
         for i in range(l-2):
+            # to avoid duplicate triplets
+            # if the current number is equal to the previous 1st number
+            # do not take the current number as the 1st number
             if num_1 == nums[i]:
                 continue
+            # take the current number as the 1st number
             num_1 = nums[i]
+            # set searching end points
+            # try taking the next number as 2nd number
+            # and the last number in the list as the 3rd number
             j = i + 1
             k = l - 1
+            # shrink the search range until the endpoints meet
             while j < k:
+                # take the current endpoints as the 2nd and 3rd numbers
                 num_2 = nums[j]
-                num_3 = nums[k]                             
-                if num_1 + num_2 + num_3 == 0:                    
+                num_3 = nums[k]
+                # if the current triplets sum to zero
+                if num_1 + num_2 + num_3 == 0:       
+                    # add the triplets to the answer set
                     ans.append([num_1,num_2,num_3])  
+                    # to avoid duplicate triplets
+                    # if remaining search range is not empty and
+                    # the end point at front equal to previous num_2
+                    # or the end points at tail equal to previous num_3
+                    # update endpoints and shrink search range
+                    while (j < k) and (nums[j] == num_2):
+                        j = j + 1                     
                     while (j < k) and (nums[k] == num_3):
                         k = k - 1
-                    while (j < k) and (nums[j] == num_2):
-                        j = j + 1       
+                # if the current triplets do not sum to zero    
+                # adjust endpoints accordingly
                 else:
+                    # if the current sum is larger than zero
                     if num_1 + num_2 + num_3 > 0:
+                        # the 3rd number is too large
+                        # try the smaller one before the current one
                         k = k - 1
+                    # if the current sum is smaller than zero
                     else:
+                        # the 2nd number is too small
+                        # try the larger one after the current one
                         j = j + 1               
                     
         return ans
