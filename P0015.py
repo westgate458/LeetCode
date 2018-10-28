@@ -15,7 +15,7 @@ class Solution(object):
         l = len(nums)
         # sort the list in ascending order for faster searching
         nums.sort()
-        # set initial answer set to empty
+        # set initial answer to empty
         ans = []
         # set previous 1st number to NaN
         num_1 = float('nan')
@@ -48,7 +48,7 @@ class Solution(object):
                     # to avoid duplicate triplets
                     # if remaining search range is not empty and
                     # the end point at front equal to previous num_2
-                    # or the end points at tail equal to previous num_3
+                    # or the end point at tail equal to previous num_3
                     # update endpoints and shrink search range
                     while (j < k) and (nums[j] == num_2):
                         j = j + 1                     
