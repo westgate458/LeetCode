@@ -5,7 +5,7 @@ Created on Mon Oct 29 17:40:36 2018
 @author: Tianqi Guo
 """
 
- # Definition for singly-linked list.
+# Definition for singly-linked list.
 class ListNode(object):
      def __init__(self, x):
          self.val = x
