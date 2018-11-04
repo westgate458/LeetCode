@@ -26,21 +26,20 @@ class Solution(object):
         head = ListNode(-num_inf)
         p = head
         
-        nums = []        
+        nums = []      
+        inds = []
         for i in range(ls):
             if ps[i]:
                 nums.append(ps[i].val)
                 ps[i] = ps[i].next
-            else:
-                nums.append(num_inf)
-        ls_range = range(ls)
-        yx = zip(nums, ls_range)
+                inds.append(i)
+        yx = zip(nums, inds)
         yx.sort()
         nums = [y for y, x in yx]
         inds = [x for y, x in yx]
         
-        while nums[0] < num_inf:
-            print(nums)
+        while nums:
+            
             num = nums.pop(0)
             ind = inds.pop(0)
             
@@ -51,21 +50,22 @@ class Solution(object):
                 num = ps[ind].val
                 ps[ind] = ps[ind].next
             else:
-                num = num_inf
-                
-            print(num,nums)     
-            if (ls == 1) or (num <= nums[0]):
+                continue
+            
+            l_nums = len(nums) 
+            
+            if (l_nums == 0) or (num <= nums[0]):
                 nums.insert(0,num)
                 inds.insert(0,ind)   
             else:
                 if num >= nums[-1]:
-                    nums.insert(ls-1,num)
-                    inds.insert(ls-1,ind)  
+                    nums.insert(l_nums,num)
+                    inds.insert(l_nums,ind)  
                 else:
                     left = 0
-                    right = ls-2            
+                    right = l_nums - 1           
                     while right - left > 1:
-                        mid = (left + right)/2                   
+                        mid = (left + right)/2
                         if nums[mid] <= num:
                             left = mid
                         else:
@@ -75,11 +75,11 @@ class Solution(object):
                         inds.insert(left+1,ind)
                     else:
                         nums.insert(left,num)
-                        inds.insert(left,ind)           
-                            
+                        inds.insert(left,ind)        
                 
-        return head.next           
+        return head.next          
          
+ 
 nums_list = [[-9,-7,-7],[-6,-4,-1,1],[-6,-5,-2,0,0,1,2],[-9,-8,-6,-5,-4,1,2,4],[-10],[-5,2,3]]
 lists = []
 
