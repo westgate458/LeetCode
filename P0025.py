@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov  3 20:35:52 2018
+Created on Sun Nov  4 21:56:34 2018
 
 @author: Tianqi Guo
 """
@@ -12,9 +12,10 @@ class ListNode(object):
          self.next = None
 
 class Solution(object):
-    def swapPairs(self, head):
+    def reverseKGroup(self, head, k):
         """
         :type head: ListNode
+        :type k: int
         :rtype: ListNode
         """
         
@@ -28,7 +29,7 @@ class Solution(object):
             c = c + 1 
             ps.append(p)
             p = p.next
-            if c % 2 == 0:
+            if c % k == 0:
                 pt = prev
                 while ps:
                     pt.next = ps.pop(-1)
@@ -39,12 +40,10 @@ class Solution(object):
         while ps:
             pt.next = ps.pop(0)
             pt = pt.next            
-        return root.next
-                
-            
-        
+        return root.next        
 
-nums = [1,2,3,4,5]        
+nums = [1,2,3,4,5]   
+k = 3     
 l1 = ListNode(nums[0])
 p = l1
 for i in range(1,len(nums)):
@@ -52,7 +51,8 @@ for i in range(1,len(nums)):
     p = p.next  
     
 test = Solution()
-p = test.swapPairs(l1)
+p = test.reverseKGroup(l1,k)
 while p != None:
     print(p.val)      
     p = p.next
+
