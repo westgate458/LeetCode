@@ -29,13 +29,14 @@ class Solution(object):
             c = c + 1 
             ps.append(p)
             p = p.next
-            if c % k == 0:
+            if c == k:
                 pt = prev
                 while ps:
                     pt.next = ps.pop(-1)
                     pt = pt.next          
                 prev = pt
                 prev.next = None
+                c = 0
         pt = prev
         while ps:
             pt.next = ps.pop(0)
