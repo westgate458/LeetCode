@@ -11,14 +11,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-                
+        
+        # pointer to traverse the list
         p = 1
+        
+        # compare each element with its previous one
         while p < len(nums):
+            # if current element different from previous one
             if nums[p] != nums[p-1]:                
+                # continue searching
                 p = p + 1               
             else:
+                # remove if duplicates found
                 nums.pop(p)
-            
+        
+        # return list after duplicates removed
         return len(nums)
         
         
