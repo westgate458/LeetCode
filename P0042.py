@@ -4,60 +4,43 @@ Created on Thu Dec 13 16:23:59 2018
 
 @author: Tianqi Guo
 """
-import matplotlib.pyplot as plt; plt.rcdefaults()
-
-import matplotlib.pyplot as plt
-
-height = [5,4,1,2]
-l = len(height)
 
 
-plt.bar(range(l), height, align='center', alpha=0.5)
-plt.show()
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        l = len(height)
 
-height_sum = [0]
-for i in range(l):
-    height_sum.append(height_sum[-1] + height[i])
-height_sum.pop(0)
+        pre = [0 for x in range(l)]
+        pst = [0 for x in range(l)]
 
-pre = []
-h = 0
-p = -1
-for i in range(l):    
-    pre.append([p,h])
-    if height[i] >= h:
-        h = height[i]
-        p = i
+        h_l = 0
+        h_r = 0
 
-pst = []
-h = 0
-p = l
-for i in range(l-1,-1,-1):    
-    pst.append([p,h])
-    if height[i] >= h:
-        h = height[i]
-        p = i
+        for i in range(l):    
+            pre[i] = h_l
+            pst[l-1-i] = h_r
+            if height[i] > h_l:
+                h_l = height[i]  
+            if height[l-1-i] > h_r:
+                h_r = height[l-1-i]  
+
+        ans = 0        
+
+        for i in range(l):
+            if pre[i] <= pst[i]:
+                h = pre[i]
+            else:
+                h = pst[i]        
+
+            if height[i] < h:
+                ans = ans + h - height[i]
         
-ans = 0        
-i = 0
-while i < l - 1:
-    print(i)
-    
-    j = pst[l-1-i][0]    
-    while pre[j][0] != i:
-        print j
-        j = pre[j][0]
-        
-    
-    delta = max(height[i],height[j]) * (j - i - 1) - (height_sum[j-1] - height_sum[i])
-    
-    ans = ans + delta
-    print(i,j,delta,ans)
-    i = j   
-    
-print(ans)
-        
-    
-    
-            
-    
+        return ans
+
+height = [0,1,0,2,1,0,1,3,2,1,2,1]    
+test = Solution()
+print(test.trap(height))    
