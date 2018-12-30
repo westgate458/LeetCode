@@ -12,16 +12,25 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         
-        def dfs(nums,permutation):            
+        # sub DFS function for n numeration 
+        def dfs(nums,permutation):          
+            # if no number is left, has reached n-th numeration 
             if len(nums) == 0:
+                # record the current permutation
                 ans.append(permutation)
+            # if still numbers remain, perform numeration for current position
             else:
-                for i in range(len(nums)):            
+                # add each remaining number to permutation
+                for i in range(len(nums)):     
+                    # next dfs with updated remaining numbers and permutation
                     dfs(nums[:i]+nums[i+1:],permutation+[nums[i]])
-                    
+        
+        # answer list stores all permutations           
         ans = []
+        # start DFS with all available numbers and empty permutation
         dfs(nums,[])  
         
+        # return answer list
         return(ans)
 
 nums = [1,2,3]
