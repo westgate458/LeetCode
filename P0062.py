@@ -16,7 +16,7 @@ class Solution(object):
         
         return math.factorial(m+n-2)/(math.factorial(m-1)*math.factorial(n-1))
         
-m = 7
+m = 3
 n = 3
 
 test = Solution()
