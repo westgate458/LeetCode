@@ -14,6 +14,11 @@ class Solution(object):
         :rtype: int
         """
         
+        # the number of unique paths
+        # is the number of total permutations of
+        # (m-1) right moves and (n-1) down moves
+        # without considering the orders within each categary
+        
         return math.factorial(m+n-2)/(math.factorial(m-1)*math.factorial(n-1))
         
 m = 3
