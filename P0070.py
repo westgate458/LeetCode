@@ -11,10 +11,16 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # Fibonacci sequence
+        
+        # first two terms of the sequence
         f = [1,1]
+        # find the terms sequentially
         for i in range(2,n+1):
+            # each term is the sum of the previous two terms
             f.append(f[i-2] + f[i-1])
-
+        
+        # return the last term
         return f[-1]
 
 
