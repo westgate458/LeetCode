@@ -89,6 +89,23 @@ class Solution(object):
         # if target not found, return -1
         return -1
         
+#        h = 0
+#        t = len(nums) - 1        
+#        while h <= t:            
+#            m = (h + t)/2            
+#            if nums[m] == target:
+#                return m 
+#            if nums[h] <= nums[m]:
+#                if nums[h] <= target < nums[m]:
+#                    t = m - 1
+#                else:
+#                    h = m + 1
+#            else:
+#                if nums[m] < target <= nums[t]:
+#                    h = m + 1
+#                else:
+#                    t = m - 1        
+#        return -1
         
 nums = [1,3,5]
 target = 5
@@ -97,21 +114,3 @@ test = Solution()
 print(test.search(nums,target))
 
   
-                
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
