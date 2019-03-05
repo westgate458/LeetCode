@@ -17,23 +17,28 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-                
+        
+        # traverse pointer starting from head
         p = head        
                
+        # continue traverse until tail
         while p:      
             
+            # pointer to next node
             pt = p.next
             
+            # move on to next node if its value equal to curent node
             while (pt != None) and (pt.val == p.val):        
                 pt = pt.next      
-                
+            
+            # a new value has appeared
+            # add this node to the answer list
             p.next = pt
             p = pt
                    
+        # return the list after duplicates are removed
         return head
-            
-
-        
+                    
 nums = [1,1,1,2,3]
 n = 2
 head = ListNode(nums[0])
