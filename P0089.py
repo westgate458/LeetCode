@@ -9,7 +9,8 @@ class Solution(object):
         """
         :type n: int
         :rtype: List[int]
-        """      
+        """    
+#        # less efficient dfs version
 #        def dfs(s, d, code):                    
 #            if d == 1:       
 #                return code              
@@ -31,10 +32,23 @@ class Solution(object):
 #        s_0 = '0' * n
 #        return dfs(s_0, 2**n, [0])
         
+        # build gray code for (n) from (n-1) by
+        # 1) reversing the entries for the gray codes of (n-1)
+        # 2) prefixing the entries in the the gray codes of (n-1) with a binary 0,
+        #    for decimal (0 + entry)_2 is just keeping the entries as they are
+        # 3) prefixing the entries in the reversed list with a binary 1
+        #    for decimal (1 + entry)_2 = (2^i + entry)_10 for entry in reversed order
+        # 4) concatenating the original list with the reversed list.
+        
+        # start from gray codes for n = 0
         ans = [0]
+        # construct the gray codes one by one
         for i in range(n):
+            # gray codes for n is
+            # [entries from gray codes for (n-1)] + [2^i + entries from reversed gray codes for (n-1)]
             ans = ans + [x + 2**i for x in ans[::-1]]
-            
+        
+        # return gray codes for current n
         return ans
     
 n = 4

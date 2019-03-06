@@ -21,15 +21,18 @@ class Solution(object):
             # if still numbers left
             if nums:
                 # for each number available
-                for i in range(len(nums)): 
-                    # continue dfs with
-                    # reduced number list, and augmented set
+                for i in range(len(nums)):                     
+                    # only continue dfs when current number is different from previous one
+                    # to deal with duplicates
                     if i == 0 or nums[i] > nums[i-1]:
+                        # continue dfs with
+                        # reduced number list, and augmented set
                         dfs(nums[i+1:],sets+[nums[i]])        
         
         # answer list for all subsets
         ans = []               
         # start dfs with all available numbers and an empty set
+        # sort the list first to deal with duplicates
         dfs(sorted(nums),[])  
         
         # return the answer list
