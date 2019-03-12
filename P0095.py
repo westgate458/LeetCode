@@ -20,9 +20,10 @@ class Solution(object):
         :rtype: List[TreeNode]
         """
         
-        def construct(nums):           
+        self.dict = {}
         
-            l = len(nums)
+        def construct(begin, end):           
+        
             root_list = []
             
             if l > 1:
@@ -63,5 +64,6 @@ test = Solution()
 root_list = test.generateTrees(n)
 
 
-            
+for i in [None]:
+    print 1
         
