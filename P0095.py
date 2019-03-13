@@ -20,50 +20,32 @@ class Solution(object):
         :rtype: List[TreeNode]
         """
         
-        self.dict = {}
-        
-        def construct(begin, end):           
-        
-            root_list = []
-            
-            if l > 1:
-                for i in range(l):    
-                    nums_left = nums[:i]
-                    nums_root = nums[i]
-                    nums_right = nums[i+1:]  
-                    
-                    if nums_left:
-                        list_left = construct(nums_left)
-                    else:
-                        list_left = [None]
-                        
-                    if nums_right:
-                        list_right = construct(nums_right)   
-                    else:
-                        list_right = [None]                        
-                                
-                    for left in list_left:
-                        for right in list_right:
-                            root = TreeNode(nums_root)
+        def construct(begin, end): 
+            if (begin, end) in self.dict:
+                return self.dict[(begin, end)]
+            elif begin > end:
+                return [None]
+            elif begin == end:
+                return [TreeNode(begin)]
+            else:
+                root_list = []
+                for mid in range(begin,end+1):   
+                    for left in construct(begin, mid-1):
+                        for right in construct(mid+1, end):
+                            root = TreeNode(mid)
                             root.left = left
                             root.right = right
-                            root_list.append(root)
-            else:
-                root_list.append(TreeNode(nums[0]))
-                
+                            root_list.append(root) 
+                self.dict[(begin, end)] = root_list
             return root_list
         
         if n == 0:
             return []
         else:
-            return construct(range(1,n+1))
+            self.dict = {} 
+            return construct(1,n)
     
 
-n = 0
+n = 3
 test = Solution()
-root_list = test.generateTrees(n)
-
-
-for i in [None]:
-    print 1
-        
+root_list = test.generateTrees(n)  
