@@ -30,12 +30,19 @@ class Solution(object):
 #        else:
 #            self.dict = {} 
 #            return construct(1,n)
-                
+        
+        # f[n]: number of BST for n                
         f = [0] * (n+1)        
+        # one BST for n = 0
         f[0] = 1
+        # f[n] is constructed from all previous f[0..n-1]
         for num in range(1,n+1):
+            # try all numbers as the mid number
             for mid in range(1,num+1):
+                # add the number of all combinations formed by one BST from left and one BST from right 
+                # to number of BST for current n
                 f[num] += f[mid-1] * f[num-mid]
+        # the number of BSTs for current n
         return f[n] 
 n = 9
 test = Solution()

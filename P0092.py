@@ -19,40 +19,63 @@ class Solution(object):
         :rtype: ListNode
         """
         
+        # dummy link head
         dm = ListNode(None)
         dm.next = head
         
+        # traverse pointer
         p = head
+        # position number count
         c = 0
+        # previous node within segment
         pp = None
+        # pointer to the node before target segment
         p0 = dm
   
+        # continue traversing until tail
         while p:
             
-            c = c + 1            
-            
+            # update position counter
+            c = c + 1
+            # check if has reached the node before target segment
             if c == m - 1:
+                # store current position
                 p0 = p
+                # move on to next node
                 p = p.next                
-            
+            # check if within target segment
             elif m <= c <= n:
+                # temporary pointer to current node
                 pt = p
+                # update traverse pointer to next node
                 p = p.next
+                # put previous node within segment after current node
                 pt.next = pp
+                # update previous node within segment to be current node
                 pp = pt 
-                
+            # check if has past target segment
             elif c == n + 1:
+                # put current node after the last node in target segment after reversing
                 p0.next.next = p
+                # put previous node within segment (now is the first node after reversing)
+                # after the node before target segment
                 p0.next = pp                
+                # no need to continue, terminate traversing
                 break  
-            
+            # if current node is of no interest
             else:
+                # move on to next node
                 p = p.next
-        
+        # if p is none, it means traverse has reached the end
+        # so the tail is within the target segment
         if not p:
+            # the last node in target segment after reversing should now be the tail
             p0.next.next = None
+            # put previous node within segment (now is the first node after reversing)
+            # after the node before target segment 
             p0.next = pp  
-            
+        
+        # return reversed list
         return dm.next
         
 nums = [1, 2, 3, 4, 5]

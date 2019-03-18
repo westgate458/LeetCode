@@ -19,7 +19,12 @@ class Solution(object):
         :rtype: List[int]
         """
         
+        # if current node is None
         if not root:
+            # return empty list
             return []
+        # if current node has value
         else:
+            # current inoder trasversal is composed by
+            # [inoder trasversal of left subtree] + [current node value] + [inoder trasversal of right subtree]
             return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
