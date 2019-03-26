@@ -30,4 +30,4 @@ class Solution(object):
             ans.append([n.val for n in s])   
             s = [child for n in s for child in [n.left, n.right] if child]              
             
-        return ans
+        return ans[::-1]
