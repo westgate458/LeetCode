@@ -10,9 +10,7 @@ class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
-        self.right = None
-
-   
+        self.right = None   
 
 class Solution(object):
     def sortedArrayToBST(self, nums):
@@ -21,16 +19,20 @@ class Solution(object):
         :rtype: TreeNode
         """
         
-        if not nums:
-            return None  
+        def construct(l, r):   
         
-        mid = len(nums)//2
+            if l > r:
+                return None  
+
+            mid = (l + r)//2
+
+            root = TreeNode(nums[mid])     
+            root.left = construct(l, mid - 1)
+            root.right = construct(mid + 1, r)
+
+            return root
         
-        root = TreeNode(nums[mid])     
-        root.left = self.sortedArrayToBST(nums[:mid])
-        root.right = self.sortedArrayToBST(nums[mid+1:])
-        
-        return root
+        return construct(0, len(nums)-1)
         
     
 nums = [-10,-3,0,5,9]
