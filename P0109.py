@@ -29,26 +29,35 @@ class Solution(object):
         :rtype: TreeNode
         """
         
-        nums = []
-        
+        # convert linked list to regular list
+        nums = []        
         while head:
             nums.append(head.val)
             head = head.next
-            
+        
+        # subfunction constructs BST from nums in range (l, r)
         def sortedArrayToBST(l, r):
-               
+            
+            # if current range is empty return none
             if l > r:
                 return None  
 
-            mid = (l + r)/2        
+            # find midpoint
+            mid = (l + r)/2     
+            # construct root node using the midpoint value
             root = TreeNode(nums[mid])  
-
+            
+            # if only one element then return constructed root
             if l == r:
                 return root
 
+            # construct left subtree recursively with values before midpoint
             root.left = sortedArrayToBST(l, mid - 1)
+            # construct right subtree recursively with values after midpoint
             root.right = sortedArrayToBST(mid + 1, r)
-
+            
+            # return constructed root with its child subtrees
             return root    
         
+        # call subfunction and construct BST using all the numbers given
         return sortedArrayToBST(0, len(nums)-1)

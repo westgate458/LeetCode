@@ -19,19 +19,27 @@ class Solution(object):
         :rtype: TreeNode
         """
         
+        # subfunction constructs BST from nums in range (l, r)
         def construct(l, r):   
-        
+            
+            # if current range is empty return none
             if l > r:
                 return None  
-
+            
+            # find midpoint
             mid = (l + r)//2
-
+            
+            # construct root node using the midpoint value
             root = TreeNode(nums[mid])     
+            # construct left subtree recursively with values before midpoint
             root.left = construct(l, mid - 1)
+            # construct right subtree recursively with values after midpoint
             root.right = construct(mid + 1, r)
-
+            
+            # return constructed root with its child subtrees
             return root
         
+        # call subfunction and construct BST using all the numbers given
         return construct(0, len(nums)-1)
         
     

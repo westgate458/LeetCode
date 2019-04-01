@@ -19,15 +19,24 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         
+        # deal with trivial case
         if not root:
-            return []        
+            return []     
         
+        # stack storing nodes at each level
         s = [root]
+        # answer list storing values from each level
         ans = []
         
+        # continue traversing while still nodes left
         while s:         
             
+            # append values from current level to answer list
             ans.append([n.val for n in s])   
+            # continue to next level
+            # update s and place children into s if not none
             s = [child for n in s for child in [n.left, n.right] if child]              
-            
+        
+        # return the values at each level, in reversed order
+        # i.e. from leaf to root
         return ans[::-1]
