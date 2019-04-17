@@ -12,27 +12,22 @@ class Solution(object):
         :rtype: int
         """
         
-        self.ans = root.val
+        def dfs(node):        
+            
+            sums = [0]
+            if node.left:
+                sums += [dfs(node.left)]
+            if node.right:
+                sums += [dfs(node.right)]                               
+            
+            sum_linked_out = max(sums) + node.val            
+            sum_with_in = sum(sums) + node.val
+            
+            self.ans = max(self.ans, sum_linked_out, sum_with_in)          
+            
+            return sum_linked_out
         
-        def helper(node):
-            
-            if not node:
-                return float('-inf')
-            
-            left_sum = helper(node.left)
-            right_sum = helper(node.right)    
-            
-            sum_only_root = node.val
-            sum_left_root = node.val + left_sum
-            sum_right_root = node.val + right_sum           
-            
-            max_sum = max(sum_only_root, sum_left_root, sum_right_root)
-            
-            sum_all = node.val + left_sum + right_sum
-            self.ans = max(self.ans, max_sum, sum_all)          
-            
-            return max_sum
-           
-        helper(root)
+        self.ans = root.val
+        dfs(root)
         
         return self.ans
