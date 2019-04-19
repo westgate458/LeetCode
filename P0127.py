@@ -2,7 +2,7 @@
 """
 Created on Thu Apr 18 21:15:55 2019
 
-@author: westg
+@author: Tianqi Guo
 """
 from collections import defaultdict
 class Solution(object):
@@ -21,8 +21,7 @@ class Solution(object):
         wl = len(beginWord)
         for word in wordList:
             for i in range(wl):
-                intermediate_words[word[:i]+'*'+word[i+1:]].append(word)
-      
+                intermediate_words[word[:i]+'*'+word[i+1:]].append(word)      
         
         s = [beginWord]   
         wordSet = set(wordList)
