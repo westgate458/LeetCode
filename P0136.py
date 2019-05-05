@@ -12,21 +12,27 @@ class Solution(object):
         :rtype: int
         """
         
-        # Solution 1        
+        # Solution 1: using XOR
+        # 0 XOR a = a
+        # a XOR a = 0
+        # a XOR a XOR b = a XOR b XOR a
+        
+        # start with 0's
         ans = 0
+        # for each number
         for num in nums:
-            ans ^= num            
+            # calculate XOR between number and answer
+            ans ^= num                    
+        # answer is the single number
         return ans
         
-        # Solution 2
-        num_set = set()
-        
+        # Solution 2: using SET
+        num_set = set()        
         for num in nums:
             if num in num_set:
                 num_set.remove(num)
             else:
-                num_set.add(num)
-                
+                num_set.add(num)                
         return num_set.pop()
     
 nums = [4,1,2,1,2]

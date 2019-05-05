@@ -13,18 +13,37 @@ class Solution(object):
         :rtype: int
         """
         
-        # Solution 1
+        # Solution 1        
+        # no soluition if total cost is larger than total gas available
         if sum(gas) < sum(cost):
             return -1
         
+        # residual gas in tank, and starting point
         res, start = 0, 0        
         
+        # check each station
         for i in range(len(gas)):
+            # update residual gas in tank
             res += gas[i] - cost[i]
+            # if residual is negative
+            # we can not get to next station
+            # and all previous stations can not be the starting point
+            # since for each previous station we needed non-negative residual gas from earlier stations
+            # to get to current position
             if res < 0:
+                # start from next station with 0 residual gas in tank
                 res = 0
                 start = i + 1
-                
+        
+        # for the 2nd segment (from start position till end) we have sum(gas)_1 - delta_1 = sum(cost)_1
+        # and for the other half (1st segment) we have sum(gas)_2 + delta_2 = sum(cost)_2
+        # so sum(gas)_1 + sum(gas)_2 + delta_2 - delta_1 = sum(cost)_1 + sum(cost)_2
+        # i.e. sum(gas) - sum(cost) = delta_1 - delta_2 >= 0
+        # we have delta_1 >= delta_2
+        # so the residual gas after the 2nd segment is sufficient to cover 
+        # the deficiency in the 1st segment to make the round trip
+
+        # return the starting point                
         return start
             
         

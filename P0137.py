@@ -12,10 +12,12 @@ class Solution(object):
         :rtype: int
         """
         
-        # Solution 1
+        # Solution 1: using difference of sum
+        # sum(set(nums)): each number appears only once
+        # sum(nums): original appearences
         return (3 * sum(set(nums)) - sum(nums))//2
         
-        # Solution 2
+        # Solution 2: using dictionary as hash table
 #        num_dict = {}
 #        for num in nums:
 #            if num in num_dict:
