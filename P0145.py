@@ -18,17 +18,29 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-               
+        
+        # deal with trivial case
         if not root:
-            return []            
-        ans = []        
+            return [] 
+        # answer list           
+        ans = []     
+        # start traversal from root
         s = [root]            
+        # continue traversal if still nodes to visit
         while s:
+            # retrieve most recent node in stack
             node = s.pop()
+            # place value of current node to answer list
             ans.append(node.val)            
+            # first place left node into stack if exists
             if node.left:
-                s.append(node.left)                
+                s.append(node.left)    
+            # then place right node into stack if exists
+            # for next round the right node is visited before left node
             if node.right:
                 s.append(node.right)        
         
+        # postorder traversal requires: left -> right -> root
+        # current traversal order: root -> right -> left
+        # return the reversed traversal result        
         return ans[::-1]
