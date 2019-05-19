@@ -11,15 +11,19 @@ class Solution(object):
         :type tokens: List[str]
         :rtype: int
         """
-        
+        # characters for operations
         operations = set(['+', '-', '*', '/'])
-        
+        # calculator stack
         s = []
-        
+        # check each token
         for token in tokens:
+            # if current token is an operation
             if token in operations:
+                # retrieve previous two values
                 num2 = s.pop()
                 num1 = s.pop()
+                # perform operation accordingly
+                # store result in num
                 if token == '+':
                     num = num1 + num2
                 elif token == '-':
@@ -28,16 +32,19 @@ class Solution(object):
                     num = num1 * num2
                 else:
                     num = num1 / num2
+                    # round division result towards zero
+                    if num > 0:
+                        num = math.floor(num)
+                    else:
+                        num = math.ceil(num)
+            # if current token is an number
             else:
+                # convert current token to float
                 num = float(token)
-            if num > 0:
-                num = math.floor(num)
-            else:
-                num = math.ceil(num)
+            # place result to calculator stack
             s.append(num)            
-        
-        return int(s[0])
-        
+        # return the final result still in the stack
+        return int(s[0])        
 
 tokens = ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"]
 test = Solution()
