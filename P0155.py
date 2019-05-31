@@ -11,26 +11,22 @@ class MinStack(object):
         """
         initialize your data structure here.
         """
-        self.s = []
-        self.minNum = 9999999999 
+        # s stores (current number, current min)
+        self.s = [(None, 9999999999)]        
 
     def push(self, x):
         """
         :type x: int
         :rtype: None
         """
-        
-        self.s.append((x, self.minNum))
-        if x < self.minNum:
-            self.minNum = x
-        
+        # push (new number, new min) into stack
+        self.s.append((x, min(x,self.s[-1][1])))
 
     def pop(self):
         """
         :rtype: None
-        """
-        
-        self.minNum = self.s[-1][1]
+        """        
+        # remove most recent (number, min)
         self.s.pop()
         
 
@@ -38,6 +34,7 @@ class MinStack(object):
         """
         :rtype: int
         """
+        # current number from top of the stack
         return self.s[-1][0]
         
 
@@ -45,7 +42,9 @@ class MinStack(object):
         """
         :rtype: int
         """
-        return self.minNum
+        # current min from top of the stack
+        return self.s[-1][1]
+        
         
 
 

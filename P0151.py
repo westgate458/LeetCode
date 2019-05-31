@@ -12,10 +12,10 @@ class Solution(object):
         :rtype: str
         """        
         
-        # Solution 1
+        # Solution 1: using split function
         return ' '.join(s.split()[::-1])
         
-#        # Solution 2
+#        # Solution 2: straight-up string operation
 #        ans = ''
 #        word = ''
 #        for ch in s[::-1] + ' ':

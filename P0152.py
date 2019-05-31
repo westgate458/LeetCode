@@ -11,12 +11,27 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # maintain three running records
+        # minimum product including current number
+        # maximum product including current number
+        # the maximum product for answer
         min_p, max_p, ans = 1, 1, None
-        for num in nums:                 
+        # for each number in the list
+        for num in nums:             
+            # calculate the two products
+            # product of previous maximum product with current number
             p1 = max_p * num
+            # product of previous minimum product with current number
             p2 = min_p * num     
+            # new minimum product is to choose from
+            # 1) new minimum product starts from current number, 
+            # 2) new minimum product includes previous numbers
             min_p = min(num, p1, p2)
+            # new maximum product is to choose from
+            # 1) new maximum product starts from current number, 
+            # 2) new maximum product includes previous numbers
             max_p = max(num, p1, p2)
+            # update answer for maximum product if necessary
             ans = max(max_p,ans)            
 #            if num >= p1:                
 #                if p1 >= p2:
