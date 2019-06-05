@@ -11,28 +11,14 @@ class Solution(object):
         :type numbers: List[int]
         :type target: int
         :rtype: List[int]
-        """
-        
-        l = len(numbers)
-        
-        for i in xrange(l):
-            num1 = numbers[i]
-            num2 = target - num1
-            print num1
-            
-            h, t = i + 1, l
-            while h < t :
-                
-                m = (h+t)//2
-                print h,m,t
-                if numbers[m] == num2:
-                    return [i+1,m+1]
-                if numbers[m] > num2:
-                    t = m - 1
-                else:
-                    h = m + 1
-
-
+        """        
+        d = {}        
+        for i, num in enumerate(numbers):
+            num2 = target - num
+            if num2 in d:
+                return [d[num2]+1, i+1]
+            else:
+                d[num] = i   
 
 numbers = [5,25,75]
 target = 100         
