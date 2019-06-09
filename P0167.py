@@ -12,12 +12,19 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """        
+        # dictionary to record the indices of encountered numbers
         d = {}        
+        # check each number in the list
         for i, num in enumerate(numbers):
+            # the complementary number to look for
             num2 = target - num
+            # if we have already seen this number
             if num2 in d:
+                # return the indices
                 return [d[num2]+1, i+1]
+            # if the complementary number is unseen
             else:
+                # record the index of current number in the dictionary
                 d[num] = i   
 
 numbers = [5,25,75]

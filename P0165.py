@@ -14,17 +14,26 @@ class Solution(object):
         """
         
         # Solution 1: using map function        
+        # split two strings at '.'s and convert to list of numbers
         n1, n2 = map(int, version1.split('.')), map(int, version2.split('.'))
+        # lengths of two number lists
         l1, l2 = len(n1), len(n2)
+        # pad two lists with 0's to have equal lengths
         if l1 > l2:
             n2 = n2 + [0]*(l1-l2)
         elif l1 < l2:
             n1 = n1 + [0]*(l2-l1)            
+        # check each sub version number between the two
         for x, y in zip(n1,n2):            
+            # for current subversion number
+            # the larger number corresponds to the newer version
             if x > y:
+                # version1 newer
                 return 1
             elif x < y:
-                return -1        
+                # version2 newer
+                return -1 
+        # two versions are identical
         return 0
         
 #        # Solution 2: straight-forward        
