@@ -12,14 +12,14 @@ class Solution(object):
         :rtype: int
         """
         
-        tens = n // 10
-        ones = n % 10        
-               
-        ans = tens * 2
-        if ones >= 5:
-            ans += 1
+        ans = 0
+        while (n):
+            n /= 5
+            ans += n         
+            
         return ans
 
-n = 5
+n = 200
+
 test = Solution()
 print test.trailingZeroes(n)
