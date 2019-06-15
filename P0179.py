@@ -11,45 +11,48 @@ class Solution(object):
         :type nums: List[int]
         :rtype: str
         """
-        strs = [str(n) for n in nums]
         
-        def helper(strs):
-            
-            d = defaultdict(list)
-            for s in strs:
-                d[s[0]] += [s]            
-           
-            strs_sorted = []
-            for key in sorted(d.keys(), reverse = True):
-                ss = [s[1:] for s in d[key] if s[1:]]   
-                if ss != []:                        
-                    ss = helper(ss)                    
-                    i = 0                                     
-                    while i < len(ss) and ss[i][0] > key:
-                        i += 1                        
-                    ss = [key + s for s in ss]
-                    ss = ss[0:i] + [key] * (len(d[key]) - len(ss)) + ss[i:]
-                else:
-                    ss = d[key]
-               
-                strs_sorted += ss   
-                
-            return strs_sorted 
-        
-        ans = ''.join(helper(strs))
-        if ans.lstrip('0') == '':
-            return '0'
-        else:
-            return ans
-            
+        def helper(k, data):             
+      
+            ss_empty = [x[0] for x in data if x[1] < k+1]            
+            ss = [x for x in data if x[1] >= k+1]   
 
+            d = defaultdict(list)
+            for s in ss:
+                d[s[0][k]] += [s]  
+  
+            ss_sorted = []
+            for key in sorted(d.keys(), reverse = True): 
+                ss_sorted += helper(k + 1, d[key])               
+          
+            if ss_empty != []:
+                i = 0                
+                while i < len(ss_sorted) and (ss_sorted[i] + ss_empty[0] > ss_empty[0] + ss_sorted[i]):
+                    i += 1                    
+                ss_sorted = ss_sorted[:i] + ss_empty + ss_sorted[i:]
+   
+            return ss_sorted
+        
+        if sum(nums) == 0:
+            return '0' 
+        
+        strs = [str(n) for n in nums]
+        ls = [len(s) for s in strs]  
+
+        return ''.join(helper(0, zip(strs,ls)))         
         
      
 nums = [10,2]
 nums = [21, 2]
-nums = [121,12]
 nums = [3,30,34,5,9] 
+nums = [6,7,76,77,78,8]
+nums = [121,12]
 nums = [0,0]
-nums = [824,8247]
+nums = [128,12]
+nums = [2281,2162,2216,2132]
+nums = [21, 2]
+nums = [8308,830]
+nums = [2281,2]
+
 test = Solution()
 print test.largestNumber(nums)
