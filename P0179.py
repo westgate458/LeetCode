@@ -4,44 +4,40 @@ Created on Thu Jun 13 20:59:39 2019
 
 @author: Tianqi Guo
 """
-from collections import defaultdict
+
 class Solution(object):
     def largestNumber(self, nums):
         """
         :type nums: List[int]
         :rtype: str
         """
-        strs = [str(n) for n in nums]
         
-        def helper(strs):
-            
-            d = defaultdict(list)
-            for s in strs:
-                d[s[0]] += [s]            
-           
-            strs_sorted = []
-            for key in sorted(d.keys(), reverse = True):
-                ss = [s[1:] for s in d[key] if s[1:]]   
-                if ss != []:                        
-                    ss = helper(ss)                    
-                    i = 0                                     
-                    while i < len(ss) and ss[i][0] > key:
-                        i += 1                        
-                    ss = [key + s for s in ss]
-                    ss = ss[0:i] + [key] * (len(d[key]) - len(ss)) + ss[i:]
-                else:
-                    ss = d[key]
-               
-                strs_sorted += ss   
-                
-            return strs_sorted 
+        # Solution 1: using cmp in sorted
+        def com(s1, s2):
+            return 1 if s1 + s2 > s2 + s1 else -1           
+        return ''.join(sorted(map(str, nums), cmp = com, reverse = True)).lstrip('0') or '0' 
         
-        ans = ''.join(helper(strs))
-        if ans.lstrip('0') == '':
-            return '0'
-        else:
-            return ans
-            
+#        # Solution 2: divide and conquer, sorting dictionary keys  
+#        from collections import defaultdict
+#        def helper(k, data):                  
+#            ss_empty = [x[0] for x in data if x[1] < k+1]            
+#            ss = [x for x in data if x[1] >= k+1]   
+#            d = defaultdict(list)
+#            for s in ss:
+#                d[s[0][k]] += [s]   
+#            ss_sorted = []
+#            for key in sorted(d.keys(), reverse = True): 
+#                ss_sorted += helper(k + 1, d[key])                         
+#            if ss_empty != []:
+#                i = 0                
+#                while i < len(ss_sorted) and (ss_sorted[i] + ss_empty[0] > ss_empty[0] + ss_sorted[i]):
+#                    i += 1                    
+#                ss_sorted = ss_sorted[:i] + ss_empty + ss_sorted[i:]   
+#            return ss_sorted
+#
+#        strs = map(str, nums)
+#        ls = map(len, strs)
+#        return ''.join(helper(0, zip(strs,ls))).lstrip('0') or '0'        
 
         
      
