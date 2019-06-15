@@ -11,7 +11,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: str
         """
-        
+
         # Solution 1: using cmp in sorted
         def com(s1, s2):
             return 1 if s1 + s2 > s2 + s1 else -1           
@@ -37,15 +37,20 @@ class Solution(object):
 #
 #        strs = map(str, nums)
 #        ls = map(len, strs)
-#        return ''.join(helper(0, zip(strs,ls))).lstrip('0') or '0'        
-
+#        return ''.join(helper(0, zip(strs,ls))).lstrip('0') or '0'          
         
      
 nums = [10,2]
 nums = [21, 2]
-nums = [121,12]
 nums = [3,30,34,5,9] 
+nums = [6,7,76,77,78,8]
+nums = [121,12]
 nums = [0,0]
-nums = [824,8247]
+nums = [128,12]
+nums = [2281,2162,2216,2132]
+nums = [21, 2]
+nums = [8308,830]
+nums = [2281,2]
+
 test = Solution()
 print test.largestNumber(nums)
