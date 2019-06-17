@@ -13,9 +13,22 @@ class Solution(object):
         """
 
         # Solution 1: using cmp in sorted
+        # define a comparison function
+        # it takes two value (two elements from the num list)
+        # compare which one first gives a larger number if combined
         def com(s1, s2):
-            return 1 if s1 + s2 > s2 + s1 else -1           
-        return ''.join(sorted(map(str, nums), cmp = com, reverse = True)).lstrip('0') or '0' 
+            # in order for the cmp to work this function need to 
+            # 1) return positive value if we want s2 to be placed before s1 after sorted
+            # 2) return negative value if we want s1 to be placed before s2 after sorted
+            # since sorted at default sort elements in ascending order
+            return 1 if s1 + s2 < s2 + s1 else -1      
+        # for the given number list
+        # 1) use map to convert to strs
+        # 2) sort strings based on the comparison function defined
+        # 3) join the sorted strings to form the largest number
+        # 4) strip its proceeding 0's
+        # 5) deal with trivial case of all numbers are 0
+        return ''.join(sorted(map(str, nums), cmp = com)).lstrip('0') or '0' 
         
 #        # Solution 2: divide and conquer, sorting dictionary keys  
 #        from collections import defaultdict

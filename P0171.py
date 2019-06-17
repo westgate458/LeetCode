@@ -10,10 +10,15 @@ class Solution(object):
         """
         :type s: str
         :rtype: int
-        """               
+        """     
+        # the column number          
         ans = 0
+        # check each digit of the column title string
         for c in s:
+            # each time multiply results of preceeding digits by 26
+            # then add result of current digit to the column number
             ans = ans * 26 + ord(c) - 64
+        # return the final column number
         return ans    
 
 s = 'ZY'
