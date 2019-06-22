@@ -12,11 +12,14 @@ class Solution(object):
         :type k: int
         :rtype: None Do not return anything, modify nums in-place instead.
         """        
+        # length of list
         l = len(nums)
+        # no need to do more rotation than length of list
         k %= l        
+        # swap elements in-place, put last k elements at the beginning
         nums[:k], nums[k:] = nums[-k:], nums[:l-k]
         
-        return nums
+        # return nums
         
 nums =  [1,2,3,4,5,6,7] 
 k = 3
