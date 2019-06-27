@@ -12,13 +12,20 @@ class Solution(object):
         :rtype: int
         """
         
-        # Solution 1
+        # Solution 1: DP with optimization
+        # previous max before current house, and max considering current house
         max_pre, max_cur = 0, 0              
-        for num in nums:           
+        # check each house
+        for num in nums:  
+            # 1) update previous max, which is current max in previous step
+            # 2) consider current house, decide between the two:
+            #    a) rob this house instead of previous house (previous pre-max + current money)
+            #    b) rob previous house and skip this one (keep max current unchanged)
             max_pre, max_cur = max_cur, max(max_pre + num, max_cur)  
+        # return the max profit after last house is considered
         return max_cur
     
-        # Solution 2
+        # Solution 2: 1D DP without optimization
         l = len(nums)        
         rob = [0] * (l + 1)
         pas = [0] * (l + 1)        

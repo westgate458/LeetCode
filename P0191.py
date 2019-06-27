@@ -10,5 +10,10 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
-        """        
-        return len([c for c in str(bin(n)[2:]) if c == '1'])
+        """    
+        # steps:
+        # 1) convert number to binary
+        # 2) convert to string
+        # 3) only keep '1's
+        # 4) count the number of 1 bits
+        return len([c for c in str(bin(n)) if c == '1'])
