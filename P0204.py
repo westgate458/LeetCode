@@ -1,25 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul  2 16:29:50 2019
+Created on Sun Jun 30 19:41:14 2019
 
 @author: Tianqi Guo
 """
 
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
 class Solution(object):
-    def reverseList(self, head):
+    def countPrimes(self, n):
         """
-        :type head: ListNode
-        :rtype: ListNode
-        """
+        :type n: int
+        :rtype: int
+        """        
+        isPrime = [False, False] + [True] * (n - 2)                
+        for num in xrange(2,int(n**0.5)+1):            
+            if isPrime[num]:     
+                isPrime[num**2:n:num] = [False] * len(xrange(num**2,n,num)) 
+        return sum(isPrime)
 
-        pre, p = None, head 
-        while p:            
-            pp, p.next = p.next, pre
-            pre, p = p, pp  
-        return pre
