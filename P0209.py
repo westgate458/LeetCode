@@ -12,13 +12,26 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """        
-        l, h, s_now = float('inf'), 0, 0        
+        # l: minimal length of a contiguous subarray
+        # h: position of the first number for the minimal subarray found
+        # s_now: the contiguous sum for the minimal subarray
+        l, h, s_now = float('inf'), 0, 0    
+        # try to use each number in the array as the last element in the minimal subarray
         for t in xrange(len(nums)):
+            # update sum
             s_now += nums[t]
+            # if current sum is larger than the required sum
             while s_now >= s:
+                # update the length
                 l = min(l, t - h + 1)
+                # try to include one fewer element from the head
                 s_now -= nums[h]
+                # update head pointer
                 h += 1
+                # then go on to check if current sum is still larger
+        # if the length is still the initialzed inf
+        # the s_now was never larger than s, so no such subarray was found
+        # otherwise return the minimal length found
         return 0 if l == float('inf') else l 
 
 s = 7

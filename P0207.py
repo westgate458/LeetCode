@@ -14,19 +14,36 @@ class Solution(object):
         :rtype: bool
         """
         
+        # each entry of dictionary is 
+        # key: prerequisite
+        # values: list of courses you can take after the key
         courses = defaultdict(list)       
+        # number of prerequisites for each course
         inDegree = [0] * numCourses
         
-        for crs, pre in prerequisites:       
+        # for each edge, construct the graph
+        for crs, pre in prerequisites:      
+            # update list of courses you can take after this prerequisite
             courses[pre] += [crs]
+            # update the number of prerequisites for this course
             inDegree[crs] += 1        
         
+        # perform BFS using a queue, start from couses without any prerequisites     
         q = [idx for idx, iD in enumerate(inDegree) if iD == 0]
-        for node in q:            
+        # continue BFS until no new node is placed at the tail
+        for node in q:       
+            # for each next course you can take after current course            
             for next_node in courses[node]: 
+                # if current course is completed
+                # the next course then required one fewer course as its prerequisites 
                 inDegree[next_node] -= 1
+                # if all the prerequisites have been taken for the next course
                 if inDegree[next_node] == 0:
+                    # now we can take this next course and place it in the queue
                     q.append(next_node)                   
+        # if total number of courses we have taken in the queue
+        # is equal to the total number of courses
+        # then it is possible to finish all courses
         return len(q) == numCourses
 
 numCourses, prerequisites = 2, [[1,0]] 

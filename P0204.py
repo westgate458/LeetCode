@@ -11,9 +11,14 @@ class Solution(object):
         :type n: int
         :rtype: int
         """        
+        # whether each number is a prime number
         isPrime = [False, False] + [True] * (n - 2)                
+        # for each prime number under sqrt(n)
         for num in xrange(2,int(n**0.5)+1):            
+            # if current number is a prime number
             if isPrime[num]:     
+                # cross off its multiples from num^2 till end
                 isPrime[num**2:n:num] = [False] * len(xrange(num**2,n,num)) 
+        # sum of list is the number of prime numbers
         return sum(isPrime)
 

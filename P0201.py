@@ -13,16 +13,23 @@ class Solution(object):
         :rtype: int
         """
                    
-        # Solution 1: 67.63%
+        # Solution 1: beats 67.63%
+        # number of bits from the right that the two numbers differ
         i = 0        
+        # continue loop until two numbers are equal
         while m != n:            
+            # shifting bits of both numbers right
+            # i.e. remove the different bits
             m >>= 1
             n >>= 1
+            # counting number of different bits
             i += 1                
+        # the 'bitwise and' should just be the bits where two numbers are identical
+        # bitwise left-shift number back to obtain the result
         return n << i
         
     
-        # Solution 2: 99.59%
+        # Solution 2: beats 99.59%
         s1, s2 = bin(m), bin(n)    
         l1, l2 = len(s1), len(s2)        
         if l2 > l1:

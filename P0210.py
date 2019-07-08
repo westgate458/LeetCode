@@ -12,6 +12,7 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: List[int]
         """
+        # for detailed comments see P207
         courses = defaultdict(list)       
         inDegree = [0] * numCourses
         
@@ -24,5 +25,10 @@ class Solution(object):
             for next_node in courses[node]: 
                 inDegree[next_node] -= 1
                 if inDegree[next_node] == 0:
-                    q.append(next_node)                   
+                    q.append(next_node)     
+      
+        # the timing to take each course when all its prerequisites have been taken
+        # i.e. when its inDegree is zero
+        # so the order of appearance of each course in q
+        # is the order of courses one should take to finish all courses
         return q if len(q) == numCourses else []

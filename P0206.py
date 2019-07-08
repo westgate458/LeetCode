@@ -18,9 +18,18 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-
+        
+        # pre: previous node
+        # p: current node
         pre, p = None, head 
+        # continue traversal until the tail
         while p:            
+            # copy next node to temporary pointer pp
+            # place previous node after current node
             pp, p.next = p.next, pre
+            # current node is now previous node
+            # continue traversal to next node
             pre, p = p, pp  
+        # after reaching tail
+        # the pre pointer is now the new head
         return pre

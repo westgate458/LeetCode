@@ -10,8 +10,10 @@ class Trie(object):
     def __init__(self):
         """
         Initialize your data structure here.
-        """        
+        """      
+        # tree is to be expressed as nested dictionary
         self.d = {}
+        # the extra state element to be included in the dictionary if current node is a word
         self.isWord = True
         
 
@@ -21,11 +23,18 @@ class Trie(object):
         :type word: str
         :rtype: None
         """        
+        # start traversal from the root        
         node = self.d
+        # determine the position of current word
+        # by checking each of its characters
         for c in word:
+            # if current character has not appeared before at this tree level
             if c not in node:                
+                # add a new branch to current node
                 node[c] = {}              
+            # continue traversal by moving on to next level
             node = node[c]
+        # include this extra state element, so we know this node is a word
         node[self.isWord] = True
 
     def search(self, word):
@@ -34,11 +43,20 @@ class Trie(object):
         :type word: str
         :rtype: bool
         """
+        # start traversal from the root   
         node = self.d
+        # determine the position of current word
+        # by checking each of its characters
         for c in word:
+            # if current character has not appeared before at this tree level
             if c not in node:                
+                # then it does not exist in this tree
                 return False
+            # continue traversal by moving on to next level
             node = node[c]             
+        # the word exists only when current node has been marked as a word
+        # i.e. when 'haha' was inserted in the tree, 'ha' was not marked as a word
+        # so when searching for 'ha', it does not exist in the tree
         return node.get(self.isWord, False)
 
     def startsWith(self, prefix):
@@ -47,13 +65,20 @@ class Trie(object):
         :type prefix: str
         :rtype: bool
         """
+        # start traversal from the root   
         node = self.d
+        # determine the position of current prefix
+        # by checking each of its characters
         for c in prefix:
-            if c not in node:                
+            # if current character has not appeared before at this tree level
+            if c not in node:  
+                # then it does not exist in this tree
                 return False
+            # continue traversal by moving on to next level
             node = node[c]              
+        # if all characters have appeared at their corresponding levels
+        # word with this prefix must exist
         return True
-
 
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()

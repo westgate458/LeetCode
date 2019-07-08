@@ -18,12 +18,22 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
+        # dummy node to point to the new head
         dummy = ListNode(0)
+        # p: start traversal from head
+        # pre: last element of already examined list
         p, pre = head, dummy        
+        # continue traversal until the tail
         while p:
+            # if current value is not to be removed
             if p.val != val:
+                # update the pre pointer
+                # add current node to result list
                 pre.next = p
                 pre = p
+            # move on to next node
             p = p.next
+        # add last element (might be None) to result list
         pre.next = p            
+        # return the new head
         return dummy.next
