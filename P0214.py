@@ -12,14 +12,27 @@ class Solution(object):
         :rtype: str
         """        
         
-        # Solution 1: beats 99%
+        # Solution 1: recursion beats 99%
+        # head pointer
         i = 0
+        # start from the tail
         for c in s[::-1]:
+            # if current character from tail matches current character from head
             if c == s[i]:
+                # move head pointer towards tail
                 i += 1       
+        # if by the time tail pointer reaches head
+        # the head pointer also reaches the tail
         if i == len(s):
+            # it means all characters match, current s is a palindrome
+            # return itself
             return s
+        # if the head pointer has not reached the tail
+        # it means it was stuck somewhere along the way
+        # and a copy of the substring from current i position till end
+        # must be reversed and added in front of s to make s a palindrome
         else:        
+            # add tail substring to the front, and recursively check the substring in the middle
             return s[i:][::-1] + self.shortestPalindrome(s[:i]) + s[i:]
         
         # Solution 2: KMP beats 78%

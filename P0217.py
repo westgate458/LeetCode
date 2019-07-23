@@ -11,4 +11,5 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
+        # duplicate exists when element count is smaller for unique set
         return len(set(nums)) < len(nums)

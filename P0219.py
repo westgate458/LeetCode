@@ -14,15 +14,21 @@ class Solution(object):
         :rtype: bool
         """
         
+        # dictionary to record last occurance position of each number
         d = {}
-        
+        # check each number
         for i in range(len(nums)):
-            
+            # if it has not appeared before, or last occurance is too far
             if (nums[i] not in d) or (i - d[nums[i]] > k):
+                # update with the new position
                 d[nums[i]] = i
+            # if it has appeared, and last appearance is within k
             else:
+                # there exist such nearby duplicate
                 return True  
-            
+        
+        # if after checking all numbers, no such duplicates exist
+        # return not found
         return False
                 
 nums = [1,0,1,1]

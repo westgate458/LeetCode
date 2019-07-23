@@ -15,7 +15,7 @@ class Solution(object):
         self.d = {}
         # the extra state element to be included in the dictionary if current node is a word
         self.isWord = True
-        
+        # results contain all the words found
         self.res = set([])        
 
     def insert(self, word):
@@ -40,10 +40,15 @@ class Solution(object):
     
     def DFS(self, i, j, node, word):    
         
+        # if current node corresponds to a word
         if self.isWord in node:
+            # add it to the results
             self.res.add(word)       
-            
+        
+        # mark current position on the board so we don't go backwards
         self.board[i][j] = ''
+        # check its 4 neighbors, see if its character is in the child nodes
+        # if true continue DFS in that direction with updated current word
         if i > 0 and self.board[i-1][j] in node:
             self.DFS(i-1,j,node[self.board[i-1][j]],word+self.board[i-1][j])
         if i < self.r-1 and self.board[i+1][j] in node:
@@ -52,6 +57,7 @@ class Solution(object):
             self.DFS(i,j-1,node[self.board[i][j-1]],word+self.board[i][j-1])
         if j < self.c-1 and self.board[i][j+1] in node:
             self.DFS(i,j+1,node[self.board[i][j+1]],word+self.board[i][j+1])       
+        # restore current character on the board
         self.board[i][j] = word[-1]    
                 
     
@@ -60,17 +66,20 @@ class Solution(object):
         :type board: List[List[str]]
         :type words: List[str]
         :rtype: List[str]
-        """        
+        """     
+        # create global variables for the board and its sizes
         self.board, self.r, self.c = board, len(board), len(board[0])
-    
+        # add each word to the Trie
         for word in words:
             self.insert(word)
-        
+        # try to start DFS from each character on the board
         for i in xrange(self.r):
             for j in xrange(self.c):
+                # check if current character is on the first level of Trie
                 if self.board[i][j] in self.d:
+                    # start DFS from current position with current character as the word
                     self.DFS(i, j, self.d[self.board[i][j]], self.board[i][j])                
-        
+        # return all found words
         return list(self.res)
 
 board = [

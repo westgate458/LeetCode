@@ -10,6 +10,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # run P0198 twice
+        # one with first house robbed, one with last house robbed
         
         l = len(nums)
         
