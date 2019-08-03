@@ -18,10 +18,13 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        
+        # deal with the trivial case or the final level
         if not root:
             return None
         
+        # recursively invert the left and right child trees
+        # then switch their positions at current level
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)        
         
+        # return the inverted tree
         return root

@@ -11,6 +11,7 @@ class MyStack(object):
         """
         Initialize your data structure here.
         """
+        # use list for the stack
         self.s = []
         
 
@@ -20,7 +21,7 @@ class MyStack(object):
         :type x: int
         :rtype: None
         """
-        
+        # place element at the end of the list, i.e. the top of the stack
         self.s.append(x)
         
 
@@ -29,7 +30,7 @@ class MyStack(object):
         Removes the element on top of the stack and returns that element.
         :rtype: int
         """
-        
+        # remove and return the last element of the list, i.e. from the top of the stack
         return self.s.pop(-1)
         
     def top(self):
@@ -37,7 +38,7 @@ class MyStack(object):
         Get the top element.
         :rtype: int
         """
-        
+        # return the last element of the list, i.e. from the top of the stack
         return self.s[-1]
 
     def empty(self):
@@ -45,7 +46,7 @@ class MyStack(object):
         Returns whether the stack is empty.
         :rtype: bool
         """
-        
+        # check if the list is empty
         return not self.s
 
 

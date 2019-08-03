@@ -12,30 +12,47 @@ class Solution(object):
         """
         
         # Solution 1 beats 99%: only stack for sign and res
+        # initialize final result, current sign, current number, and ord of character 0
         res, sign, temp, ord0 = 0, 1, 0, ord('0')
+        # stacks for signs and intermidiate results to deal with ()
         sgn_stack = []
         rst_stack = []
         
+        # check each character
         for c in s:   
-            
+            # if current character is a number
             if c.isdigit():
+                # update current number
                 temp = temp*10 + ord(c) - ord0
+            # if current character is an operation sign or ' '
+            # it means a number is finished
             else:
+                # update result with sign and number
                 res += sign * temp
+                # reset current number
                 temp = 0
-                
+                # deal with operation signs
+                # if we ran into a left bracket
                 if c == '(':                
+                    # intermidiate results and current sign need to be stacked
+                    # so we can deal with operations inside () first
                     rst_stack.append(res)
                     sgn_stack.append(sign)
+                    # reset result
                     res = 0 
+                # if a () session has ended
                 elif c == ')':
+                    # treating results inside () as a single number
+                    # and incorporate it into previous results
                     res = rst_stack.pop(-1) + sgn_stack.pop(-1) * res 
-                    
+                
+                # update the current sign                     
                 if c == '-':
                     sign = -1
                 else:
                     sign = 1
                 
+        # update final results with the last number and its sign        
         return res + sign * temp
                 
         

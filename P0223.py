@@ -20,8 +20,10 @@ class Solution(object):
         """
         
         # Solution 1: max-min beats 96.12%
+        # get the width and height of the overlapping area
         l1 = max(0, min(D, H) - max(B, F))
         l2 = max(0, min(C, G) - max(A, E))               
+        # the total area is the sum of two rectangles minus the overlapping area
         return (C-A)*(D-B) + (G-E)*(H-F) - l1 * l2
         
         # Solution 2: if-else beats 59.79%
