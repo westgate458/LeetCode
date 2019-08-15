@@ -23,11 +23,17 @@ class Solution(object):
         """
         
         # Solution 1 beats 96.48%: recursion 
+        # Case 1: both are in left sub-tree
         if p.val < root.val and q.val < root.val:
+            # check the left sub-tree
             return self.lowestCommonAncestor(root.left, p, q)
+        # Case 2: both are in right sub-tree
         elif p.val > root.val and q.val > root.val:
+            # check the right sub-tree
             return self.lowestCommonAncestor(root.right, p, q)
+        # Case 3: (one is in left, one is in right) or (either one is the current root)
         else:
+            # current root is then the Lowest Common Ancestor
             return root
         
         

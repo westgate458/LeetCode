@@ -15,14 +15,23 @@ class Solution(object):
         """
         
         # Solution 1 beats 98.85%: sliding window
+        # deal with trivial case
         if not nums:
             return []        
+        # max value of the first window
         c_max = max(nums[:k])
+        # answer for all maxima
         ans = [c_max]        
+        # slide window towards right
         for i in range(k,len(nums)):
+            # if new number is larger then current max
+            # or previous max has moved out from window
             if nums[i] > c_max or c_max == nums[i-k]:
+                # update a new max
                 c_max = max(nums[i-k+1:i+1])
+            # record current max in this window
             ans.append(c_max)
+        # return all maxima
         return(ans)
         
         

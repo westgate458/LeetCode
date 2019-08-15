@@ -18,4 +18,6 @@ class Solution(object):
         :rtype: void Do not return anything, modify node in-place instead.
         """
         
+        # 1) copy next value to current value
+        # 2) delete next node
         node.val, node.next = node.next.val, node.next.next

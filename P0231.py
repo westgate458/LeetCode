@@ -13,12 +13,19 @@ class Solution(object):
         :rtype: bool
         """
         # Solution 1 beats 61.44%: bit operation
+        # deal with trivial case
         if n <= 0:
             return False        
+        # continue bit-shift right until last digit
         while n > 1:
+            # if current n cant be divided by 2
             if n%2 != 0:
+                # it is not a power of two
                 return False
-            n = n >> 1            
+            # shift right
+            n = n >> 1   
+        # if all intermediate n's are power of 2
+        # original n is power of 2
         return True        
         
         # Solution 2 beats 84.81%: cheat by built-in functions                

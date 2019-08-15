@@ -18,22 +18,30 @@ class Solution(object):
         :rtype: bool
         """
         
+        # first count how many nodes are there
         l, p = 0, head
         while p:
             l += 1
             p = p.next
        
+        # reverse the first l/2 nodes
+        # see P0206
         pre, p = None, head 
         for _ in range(l//2):      
             pp, p.next = p.next, pre
             pre, p = p, pp                   
         
+        # in case of odd number of nodes, start comparison from next one
         if l % 2 == 1:
             p = p.next
         
+        # start from the middle, compare nodes on left and right
         while p:
+            # if not equal, original linked list is not Palindrome
             if pre.val != p.val:
                 return False
+            # move on to next ones
             pre, p = pre.next, p.next            
-            
+        
+        # if all nodes are checked, original linked list is Palindrome
         return True

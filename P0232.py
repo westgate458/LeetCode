@@ -11,6 +11,7 @@ class MyQueue(object):
         """
         Initialize your data structure here.
         """
+        # use list to represent the queue
         self.q = []
         
 
@@ -20,7 +21,7 @@ class MyQueue(object):
         :type x: int
         :rtype: None
         """
-        
+        # place at the end of list
         self.q.append(x)
 
     def pop(self):
@@ -28,7 +29,7 @@ class MyQueue(object):
         Removes the element from in front of queue and returns that element.
         :rtype: int
         """
-        
+        # pop the earliest number
         return self.q.pop(0)
         
 
@@ -37,7 +38,7 @@ class MyQueue(object):
         Get the front element.
         :rtype: int
         """
-        
+        # check the value of the earliest number
         return self.q[0]
         
 
@@ -46,6 +47,7 @@ class MyQueue(object):
         Returns whether the queue is empty.
         :rtype: bool
         """
+        # check if queue is empty
         return self.q == []
 
 

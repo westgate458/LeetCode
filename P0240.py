@@ -12,25 +12,41 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        # Solution 1 beats 99.66%
+        # Solution 1 beats 99.66%: binary search on each line
+        # deal with trivial cases
         if not matrix or not matrix[0]:
             return False        
+        # right limit: all numbers on the right of this location on this line is larger than target
+        # so all numbers on the right of this location on lines below are also larger than target
         rr = len(matrix[0]) - 1        
+        # continue searching while there are still numbers from beginning till rr
+        # and there are more lines to go
         while rr >= 0 and matrix:
+            # pop the top line for current search
+            # for some reason it is faster than 
+            # for row in matrix:
             row = matrix.pop(0)           
-            l, r = 0, rr            
+            # search limits
+            l, r = 0, rr   
+            # binary search in this limit
             while l <= r:
+                # mid value
                 m = (l + r)/2
+                # if found, return YES
                 if row[m] == target:
                     return True
+                # update left search limit on this line
                 elif row[m] < target:
                     l = m + 1
+                # update right search limit on this line
                 else:
                     r = m - 1
+                    # also update the global right limit
                     rr = m - 1 
+        # if all possibles are searched, then target does not exist
         return False
         
-#        # Solution 2 beats 8.06%
+#        # Solution 2 beats 8.06%: binary search on borders, and update rectangular searching region
 #        # subfunction for binary search
 #        def b_search(nums,target): 
 #            h, t = 0, len(nums)                
