@@ -12,4 +12,6 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
+        # two strings are anagrams if and only if 
+        # after the characters are sorted, two strings are identical
         return sorted(s) == sorted(t)
