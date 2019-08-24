@@ -11,6 +11,8 @@ class Solution(object):
         :type num: int
         :rtype: int
         """
+        # implementation of the formula
+        # https://en.wikipedia.org/wiki/Digital_root
         if num == 0:
             return 0
         else:

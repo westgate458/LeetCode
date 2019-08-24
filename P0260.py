@@ -11,10 +11,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        # dictionary to record occurances
         d = {}
+        # check each number
         for num in nums:
+            # if it has not occured before
             if num not in d:
+                # mark the dictionary
                 d[num] = 1
+            # if it has occured, then it is not we are looking for
             else:
+                # remove it from dictionary
                 del d[num]
+        # all remaining keys are the numbers
+        # that only appeared once
         return d.keys()
