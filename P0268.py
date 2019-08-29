@@ -13,7 +13,10 @@ class Solution(object):
         """   
         
         # Solution 1 beats 98.03%: length and sum
+        # length of the number list
         n = len(nums)       
+        # calculate the difference between the expected sum and actual sum
+        # which is the missing number
         return n * (n + 1)/2 - sum(nums)
     
         # Solution 2 beats 80.61%: min, max, sum
