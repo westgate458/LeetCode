@@ -32,10 +32,15 @@ class PeekingIterator(object):
         Initialize your data structure here.
         :type iterator: Iterator
         """
+        # pointer to the iterator
         self.iterator = iterator
+        # if iterator is not empty
         if self.iterator.hasNext():
+            # cache the next number
             self.cache_next = self.iterator.next()
+        # if we got an empty iterator
         else:
+            # cache None to indicate tail
             self.cache_next = None          
             
     def peek(self):
@@ -43,6 +48,7 @@ class PeekingIterator(object):
         Returns the next element in the iteration without advancing the iterator.
         :rtype: int
         """ 
+        # peek is now looking at the cached value
         return self.cache_next
     
 
@@ -50,11 +56,14 @@ class PeekingIterator(object):
         """
         :rtype: int
         """       
-        temp = self.cache_next            
+        # record current cached value
+        temp = self.cache_next       
+        # advance iterator and cache next value
         if self.iterator.hasNext():
             self.cache_next = self.iterator.next()
         else:
             self.cache_next = None  
+        # return previously cached value, which is the 'next'
         return temp
         
 
@@ -62,6 +71,7 @@ class PeekingIterator(object):
         """
         :rtype: bool
         """        
+        # iterator has next if cached value is not none
         return self.cache_next != None
 
 

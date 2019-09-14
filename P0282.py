@@ -13,27 +13,52 @@ class Solution(object):
         :rtype: List[str]
         """
         # Solution 1 beats 99.30%: keep previous sum and decide if to update
+        # deal with trivial case
         if not num:
             return []
+        # ans for all combos
         ans = []
+        # convert all str to nums
         nums = [int(x) for x in num]
+        # DFS function to solve subproblems
         def helper(p, combo, prod, preSum, curNum):
+            # p: pointer to current digit
+            # combo: current combination of nums and ops
+            # preSum: previous sum before prod begins
+            # prod: (with sign) running product from previous digits             
+            # curNum: (always non-negative) current number that current digit can be appended to 
+            # prod//curNum gives the +/- before prod begins
+            
+            # if we have reached the last digit
             if p == len(num) - 1:
+                # check four possible outcomes, see if the target is achieved
+                # 1) current digit is treated as one number alone, op is +
                 if preSum + prod + nums[p] == target:
                     ans.append(combo + '+' + num[p])
+                # 2) current digit is treated as one number alone, op is -
                 if preSum + prod - nums[p] == target:
                     ans.append(combo + '-' + num[p])
+                # 3) current digit is treated as one number alone, op is *
                 if preSum + prod * nums[p] == target:
                     ans.append(combo + '*' + num[p])
+                # 4) current digit is appended to previous number
                 if curNum and preSum + prod * 10 + prod//curNum*nums[p] == target:
                     ans.append(combo + num[p])
+            # if we have not reached the last digit yet
             else:
+                # continue DFS in the following 4 directions
+                # 1-3) take current digit as one number alone
+                #      try ops +/-/*, update prod, preSum  
+                #      and take current digit as current number
                 helper(p+1, combo+'+'+num[p], nums[p], preSum + prod, nums[p])
                 helper(p+1, combo+'-'+num[p], -nums[p], preSum + prod, nums[p])
                 helper(p+1, combo+'*'+num[p], prod * nums[p], preSum, nums[p])
+                # 4) append current digit to previous number
                 if curNum:
                     helper(p+1, combo+num[p], prod * 10 + prod//curNum*nums[p], preSum, 10*curNum+nums[p])
+        # start DFS from the 1st digit
         helper(1, num[0], nums[0], 0, nums[0])
+        # return all found combinations
         return ans
                     
             
