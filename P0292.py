@@ -11,4 +11,5 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
+        # mathematically proven
         return (n % 4 != 0)
