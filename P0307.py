@@ -2,7 +2,7 @@
 """
 Created on Thu Sep 26 19:23:57 2019
 
-@author: westg_000
+@author: Tianqi Guo
 """
 
 # Solution 1 beats  47.71%: naive segment tree
