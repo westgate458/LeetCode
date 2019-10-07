@@ -12,21 +12,35 @@ class Solution(object):
         :type s: str
         :rtype: str
         """        
+        # d: occurances of each character
+        # v: if we have encountered this character before
         d, v = defaultdict(int), defaultdict(bool)
-
-        for idx, c in enumerate(s):
-            d[c] += 1
-            v[c] = False        
-
-        res = '0'
-        for c in s:
-            d[c] -= 1
-            if v[c]:
-                continue
-            v[c] = True                
-            while c < res[-1] and d[res[-1]] > 0:                
-                v[res[-1]] = False
-                res = res[:-1]
-            res += c
         
+        # count all occurances
+        for c in s:
+            d[c] += 1               
+        
+        # result string after removal
+        # initialize with '0' so we will not pop this one
+        res = '0'
+        # check each character
+        for c in s:
+            # reduce its occurance count
+            d[c] -= 1
+            # if we have seen this character before
+            if v[c]:
+                # it has already been taken care of
+                continue
+            # mark this one visited
+            v[c] = True   
+            # if previous character in answer string is larger than current one
+            # and that character has more occurances after current position
+            while c < res[-1] and d[res[-1]] > 0:          
+                # mark it unseen
+                v[res[-1]] = False
+                # then we remove previous character for now, and add it back later
+                res = res[:-1]
+            # add current character to answer string
+            res += c
+        # return the string after removal
         return(res[1:])

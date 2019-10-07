@@ -11,4 +11,6 @@ class Solution(object):
         :type n: int
         :rtype: int
         """                 
+        # by trying n = 1000, it seems like all square numbers are the ones left on
+        # the number of square numbers below n is now int(n**0.5)
         return int(n**0.5)
