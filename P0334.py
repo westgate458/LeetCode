@@ -12,14 +12,23 @@ class Solution(object):
         :rtype: bool
         """
         # Solution 1 beats 67.12%: simplified version
+        # current smallest and 2nd smallest found
+        # if later numbers are smaller, we update accordingly
         m = n = float('inf')
+        # check each number
         for num in nums:
+            # update smallest
             if num <= m:
                 m = num
+            # update 2nd smallest
             elif num <= n:
                 n = num
+            # if current is larger than both found
             else:
+                # then we got an increasing triplet
                 return True
+        # if after all numbers are checked, no 3rd number is found
+        # no increasing triplet in the list
         return False
         
 #        # Solution 2 beats 38.61%: adaptation from P0300

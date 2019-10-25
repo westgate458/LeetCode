@@ -14,17 +14,31 @@ class Solution(object):
         """
         
         # Solution 1 beats 99.56%: greedy DFS
+        # d[from] = [to's]
         d = defaultdict(list)     
+        # sort tickets from large to small
+        # so in each d[from], smallest to is at the end to pop
         for de, ar in sorted(tickets, reverse=True):
+            # add current ticket to dictionary
             d[de].append(ar)
-        
+        # constructed itinerary
         self.iternerary = []
+        # subfunction for construct the itinerary
         def DFS(de):
+            # for current airport, for all its destinations remained at current level
             while d[de]:
+                # pop the destination at the end (smallest)
+                # continue DFS from the new airport
                 DFS(d[de].pop())
+            # we start from the smallest (greedy), so the smallest will be DFS'ed first
+            # and when it is added to the itinerary here in next level of DFS
+            # all other destinations of current airport have been added to itinerary
+            # already in deeper DFS levels due to loops back to current airport
             self.iternerary.append(de)
-        
+        # start DFS from JFK
         DFS('JFK')
+        # first added airports in deeper DFS levels are larger
+        # so in reversed order we get the smallest lexical order
         return self.iternerary[::-1]
         
 #        # Solution 2 beats 20.27%: regular DFS
