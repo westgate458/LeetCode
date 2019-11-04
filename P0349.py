@@ -13,4 +13,5 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
+        # simply find union of two sets
         return set(nums1) & set(nums2)

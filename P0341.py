@@ -38,32 +38,49 @@ class NestedIterator(object):
         Initialize your data structure here.
         :type nestedList: List[NestedInteger]
         """   
+        # cache for next value
         self.value = None
+        # DFS function to flatten each nested list
         def gen(nl):
+            # check each element in current nested list
             for x in nl:
+                # if this element is an integer
                 if x.isInteger():
+                    # pause DFS and return this value
                     yield x.getInteger()
+                # if this element is another nested list
                 else:
+                    # continue DFS
                     for y in gen(x.getList()):
+                        # pause DFS when a new value is returned
                         yield y
+        # the generator
         self.gen = gen(nestedList)
 
     def next(self):
         """
         :rtype: int
         """
+        # if we have not cached next value
         if self.value == None:
+            # use next to continue DFS in the generator function
             self.value = next(self.gen)
+        # return the cached value
         return self.value         
 
     def hasNext(self):
         """
         :rtype: bool
         """
+        # try to cache next value in the generator
         try:
+            # cache next value
             self.value = next(self.gen)
+            # return there is a next value
             return True
+        # if error occurs
         except:
+            # there is no next value
             return False
 
 

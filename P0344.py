@@ -12,8 +12,12 @@ class Solution(object):
         :type s: List[str]
         :rtype: None Do not return anything, modify s in-place instead.
         """
+        # the pointers at both ends
         i, j = 0, len(s)-1
+        # stop swapping until two pointers meet
         while (i < j):
+            # swap two elements
             s[i], s[j] = s[j], s[i]
+            # update pointers
             i += 1
             j -= 1

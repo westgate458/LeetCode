@@ -14,6 +14,9 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
+        # dictionary for the occurances of each number
         d = defaultdict(int)
+        # update dictionary for each number
         for num in nums: d[num] += 1
+        # return the top k keys based on their values
         return sorted(d, key=d.get, reverse=True)[:k]
