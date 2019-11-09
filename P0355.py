@@ -12,7 +12,9 @@ class Twitter(object):
         """
         Initialize your data structure here.
         """
+        # all users with his 'follows' and his own 'posts'
         self.users = {}
+        # order counter of each post
         self.time = 0
 
     def postTweet(self, userId, tweetId):
@@ -22,9 +24,12 @@ class Twitter(object):
         :type tweetId: int
         :rtype: None
         """
+        # update counter
         self.time += 1
+        # create new user if not already exists
         if userId not in self.users:
             self.users[userId] = {'follows':set([userId]),'posts':[]}
+        # record this new post
         self.users[userId]['posts'].append((self.time, tweetId))
 
     def getNewsFeed(self, userId):
@@ -33,13 +38,16 @@ class Twitter(object):
         :type userId: int
         :rtype: List[int]
         """
+        # create new user if not already exists
         if userId not in self.users:
             self.users[userId] = {'follows':set([userId]),'posts':[]}
-        
-        posts = [], []
+        # all posts of his follows
+        posts = []
+        # gather all posts
         for user in self.users[userId]['follows']:
             posts += self.users[user]['posts']
-     
+        # sort all posts based on post order
+        # and return the first 10 most recent posts
         return [post[1] for post in sorted(posts,reverse=True)[:10]]
         
         
@@ -51,12 +59,12 @@ class Twitter(object):
         :type followeeId: int
         :rtype: None
         """
+        # create new users if not already exists
         if followerId not in self.users:
-            self.users[followerId] = {'follows':set([followerId]),'posts':[]}
-                
+            self.users[followerId] = {'follows':set([followerId]),'posts':[]}                
         if followeeId not in self.users:
             self.users[followeeId] = {'follows':set([followeeId]),'posts':[]}
-        
+        # update the follows
         self.users[followerId]['follows'].add(followeeId)
 
     def unfollow(self, followerId, followeeId):
@@ -66,6 +74,10 @@ class Twitter(object):
         :type followeeId: int
         :rtype: None
         """
+        # unfollow if 
+        # 1) he is not unfollowing himself
+        # 2) this user exists
+        # 3) and he was following the followee
         if followerId != followeeId and followerId in self.users and followeeId in self.users[followerId]['follows']:
             self.users[followerId]['follows'].remove(followeeId)
 
