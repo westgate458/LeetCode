@@ -11,14 +11,21 @@ class Solution(object):
         :type num: int
         :rtype: bool
         """
+        # binary search for the root
         i, j = 0, num        
+        # continue search until ends meet
         while i <= j:
+            # take the mid
             m = (i + j)//2
-            m2 = m * m            
+            # try the square
+            m2 = m * m    
+            # check if root is found
             if m2 == num:
                 return True            
+            # adjust ends accordingly
             elif m2 > num:                
                 j = m - 1            
             else:                
-                i = m + 1                
+                i = m + 1            
+        # if no root is found then it is not a perfect square
         return False

@@ -13,9 +13,15 @@ class Solution(object):
         """
         
         # Solution 1 beats 98.98%: dp + dictionary
+        # initial set is empty
         dp = {-1:set()}        
+        # first sort the numbers
+        # then check each number
         for x in sorted(nums):
+            # among all previous numbers that current number is divisible by
+            # find the one with the largest subset 
             dp[x] = max([dp[y] for y in dp if x%y == 0], key=len) | set([x])        
+        # find the number with the largest subset
         return max(dp.values(), key=len)
             
 #        # Solution 2 beats 88.52%: naive dp
