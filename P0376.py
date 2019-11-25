@@ -12,14 +12,23 @@ class Solution(object):
         :rtype: int
         """
         # Solution 1 beats 71.03%: greedy
+        # deal with trivial case
         if not nums:
             return 0        
+        # longest lengths for first difference positive or negative
         p = q = 1
+        # check each number
         for i in xrange(1,len(nums)):
+            # simply switching between the two sequences
+            # based on the greedy idea:
+            # if current difference is positive
+            # then append this to previous longest sequence with negative difference
             if nums[i] > nums[i-1]:
                 p = q + 1
+            # similar for the other sequence
             elif nums[i] < nums[i-1]:
                 q = p + 1
+        # choose the longer one
         return(max(q,p))
         
         # Solution 2 beats 5.52%: DP

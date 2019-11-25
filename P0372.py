@@ -12,7 +12,11 @@ class Solution(object):
         :type b: List[int]
         :rtype: int
         """    
+        # answer and current state
         ans, f = 1, a % 1337
+        # start from the lowest digit
         for n in b[::-1]:
+            # from current state, using formula to get next state
             ans, f = (((f ** n) % 1337) * ans) % 1337, (f ** 10) % 1337
+        # return final answer
         return ans

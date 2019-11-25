@@ -16,6 +16,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # simple binary search
         i, j = 1, n
         while i <= j:
             m = (i + j)//2

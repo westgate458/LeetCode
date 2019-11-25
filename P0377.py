@@ -13,13 +13,21 @@ class Solution(object):
         """        
         
         # Solution 1 beats 93.03%: DP
+        # deal with trivial case
         if not nums:
             return 0        
+        # dp for each number
         dp = [0] * (target+max(nums))
+        # base case of number 0: # of combo is 1
         dp[0] = 1
+        # for each number in the achievable range
         for n in xrange(target):
+            # the next achievable number from current number
             for num in nums:
+                # number of combos for next number
+                # is the accumulative times when it has been accessed
                 dp[n+num] += dp[n]       
+        # number of combos for the target number
         return dp[target]
     
         # Solution 2 beats 93.03%: DFS + memorization
@@ -32,7 +40,3 @@ class Solution(object):
                     self.d[r] += DFS(r-num)
             return self.d[r]    
         return DFS(target)
-                
-    
-        
-            
