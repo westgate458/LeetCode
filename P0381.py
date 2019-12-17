@@ -27,7 +27,8 @@ class RandomizedCollection(object):
         """
         # record the index and save the number
         self.inds[val].add(len(self.nums))
-        self.nums.append(val)            
+        self.nums.append(val)    
+        # somehow we should return True if it's the first time it appeared
         return len(self.inds[val]) == 1
         
     def remove(self, val):
@@ -39,13 +40,18 @@ class RandomizedCollection(object):
         # if it doesn't exist return error        
         if not self.inds[val]:
             return False
-
+        # take val's most recent index
+        # take the last number in the list
         ind, temp = self.inds[val].pop(), self.nums[-1]
+        # add the new position index to last number's index set
         self.inds[temp].add(ind)
+        # remove the previous position from last number's position index set
         self.inds[temp].discard(len(self.nums)-1)
+        # place the last number at val's place
         self.nums[ind] = temp
+        # remove the last number from its previous position in the list
         self.nums.pop()
-      
+        # operation succeeded
         return True
 
     def getRandom(self):

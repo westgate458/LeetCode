@@ -15,9 +15,13 @@ class Solution(object):
         :rtype: bool
         """      
         # Solution 1 beats 100%: built-in function        
+        # check all characters in the ransom note
         for c in set(ransomNote):
+            # if we dont have enough characters from the magazine
             if ransomNote.count(c) > magazine.count(c):
+                # we cant make it
                 return False        
+        # after all have been checked, we have enough from magazine for the ransom note
         return True
             
         # Solution 2 beats 85.26%: dictionary

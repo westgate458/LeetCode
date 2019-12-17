@@ -21,6 +21,7 @@ class Solution(object):
         Note that the head is guaranteed to be not null, so it contains at least one node.
         :type head: ListNode
         """
+        # record all numbers in a list
         self.nums = []
         while head:
             self.nums.append(head.val)
@@ -31,6 +32,7 @@ class Solution(object):
         Returns a random node's value.
         :rtype: int
         """
+        # randomly choose from the list
         return choice(self.nums)
 
 ## Solution 2 beats 45.92%: Reservoir Sampling

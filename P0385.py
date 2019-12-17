@@ -56,13 +56,23 @@ class Solution(object):
         :type s: str
         :rtype: NestedInteger
         """
+        # subfunction to parse each nested list
         def parser(l):
+            # if current list is just one number
             if isinstance(l,int):
+                # place it in a nested list container and return it
                 return NestedInteger(l)
+            # now it should be a list
+            # initialize an empty container
             nl = NestedInteger()
+            # deal with each element in this list
             for elem in l:
+                # add the converted lists or numbers to the container
                 nl.add(parser(elem))
+            # return the converted lists at this level
             return nl
+        # first eval all strings to convert them to numbers
+        # but preserving the nest hierarchies
         return parser(eval(s))
                     
 # Solution 2 beats 91.08%: all manual             
