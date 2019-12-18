@@ -11,4 +11,5 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
+        # convertnums into strings then sort them
         return(sorted(map(str,range(1,n+1))))
