@@ -12,6 +12,7 @@ class Solution(object):
         """
         :type nums: List[int]
         """
+        # simply record the numbers
         self.nums = nums        
 
     def pick(self, target):
@@ -19,6 +20,8 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        # first gather all the indices for this number
+        # and then randomly choose one from them
         return choice([i for i, num in enumerate(self.nums) if num == target])        
 
 # Your Solution object will be instantiated and called as such:
