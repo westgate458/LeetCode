@@ -2,7 +2,7 @@
 """
 Created on Wed Jan  1 21:52:51 2020
 
-@author: westg
+@author: Tianqi Guo
 """
 
 class Solution(object):
