@@ -12,7 +12,12 @@ class Solution(object):
         :rtype: List[str]
         """        
         # Solution 1 beats 97.19% : one-liner
+        # steps:
+        # 1) for all possible combinations of hour and minute
+        # 2) check if their binary representation has desired number of ones
+        # 3) if yes add the time to answer list
         return(['%d:%0.2d'%(h,m) for h in xrange(12) for m in xrange(60) if (bin(h)+ bin(m)).count('1') == num])
+        
         # Solution 2 beats 88.52%: generator and yield
         def getPos(pos, num, i):
             if num == 0:
