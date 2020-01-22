@@ -12,10 +12,15 @@ class Solution(object):
         :rtype: int
         """
         # Solution 1 beats 95.85%: cheat by sorting
+        # remove duplicates
         nums = set(nums)
+        # if we have more than 3 distinct numbers
         if len(nums) >= 3:
+            # return the third maximum
             return(sorted(nums)[-3])
+        # if we have fewer than 3 distinct numbers
         else:
+            # simply return the maximum
             return(max(nums))
         
         # Solution 2 beats 95.85%: simple O(n)

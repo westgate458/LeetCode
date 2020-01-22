@@ -12,18 +12,37 @@ class Solution(object):
         :rtype: bool
         """       
         # Solution 1 beats 100%: sort + DFS
+        # get the sum of all numbers
         total_sum = sum(nums)
-        nums.sort(reverse=True)
+        # can be partitioned by 2 only if the total sum is even
         if total_sum%2 != 0:
             return False
+        # sort the array first for later pruning
+        nums.sort(reverse=True)   
+        # function for the partition
         def DFS(target, nums):
-            for p, num in enumerate(nums):                
+            # target: remaining sum to achieve
+            # nums: remaining candidate numbers
+            # check each number in the candidate list
+            for p, num in enumerate(nums):           
+                # if current number is larger than the target
                 if num > target:
+                    # we can not achieve the target sum since all later numbers are even larger
                     return False
+                # if we happen to get the target from current number
                 elif num == target:
+                    # we just got a partition
                     return True
+                # if current number is smaller than target sum
+                # we try add current number into partition, and try remaining smaller numbers
                 elif DFS(target-num, nums[p+1:]):
+                    # if we get a partition in deeper search
                     return True
+                # if later search didn't yield desired partition when current number is used
+                # we do nothing and do not use current number in the partition
+                # and move on to consider later numbers 
+        # we start search by setting target to be half of the total sum
+        # and use all numbers as candidates
         return DFS(total_sum//2, nums)
     
         # Solution 2 beats 25.64%: naive DP

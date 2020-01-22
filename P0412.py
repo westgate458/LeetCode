@@ -1,18 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 14 16:10:45 2020
+Created on Mon Jan 13 11:30:19 2020
 
 @author: Tianqi Guo
 """
+
 class Solution(object):
-    def numberOfArithmeticSlices(self, A):
+    def fizzBuzz(self, n):
         """
-        :type A: List[int]
-        :rtype: int
-        """        
-        l = len(A)
-        dp = [0] * l
-        for i in xrange(2,l):          
-            if A[i] - A[i-1] == A[i-1] - A[i-2]:
-                dp[i] = dp[i-1] + 1
-        return(sum(dp))
+        :type n: int
+        :rtype: List[str]
+        """
+        # list for all converted strings
+        res = []
+        # convert each number
+        for num in xrange(1,n+1):   
+            # default string
+            s = str(num)
+            # check each special case and change from the default one
+            if num%3==0:
+                s = 'Fizz'  
+            if num%5==0:
+                s = 'Buzz'
+            if num%15==0:
+                s = 'FizzBuzz'
+            # record the converted string
+            res.append(s)                
+        # all converted strings
+        return res
