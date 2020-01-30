@@ -22,14 +22,20 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: Node
         """    
+        # check each tile
         for row in grid:
             for n in row:
+                # if current tile is not the same as the first tile
+                # we need to split current grid
                 if n != grid[0][0]:
+                    # take the half length
                     ll = len(grid)/2  
+                    # deal with the four quadrants, and add them as child nodes to current node
                     return Node(None, False, 
                                 self.construct([row[:ll] for row in grid[:ll]]), 
                                 self.construct([row[ll:] for row in grid[:ll]]), 
                                 self.construct([row[:ll] for row in grid[ll:]]), 
                                 self.construct([row[ll:] for row in grid[ll:]]))
                     
+        # build the tree from top to bottom
         return Node(grid[0][0]==1 , True, None, None, None, None)
