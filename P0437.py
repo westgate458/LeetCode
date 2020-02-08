@@ -14,19 +14,36 @@ class Solution(object):
         :rtype: int
         """         
         # Solution 1 beats 97.54%： with memorization
+        # the dictionary to memorize all the accumulative sums from root until now
         self.d = defaultdict(int)
+        # base case is one sum of 0
         self.d[0] = 1
+        # sub function to check all sums along the way
         def DFS(node, cur_sum):            
+            # node: current node
+            # sum: accumulative sum from root until now
             if node:
+                # res: how many paths found
                 res = 0
+                # update the sum
                 cur_sum += node.val                
+                # in the past, if we have already seen sum from root to node_pre that equal to (cur_sum - sum)
+                # then the sum from node_pre to current node is then cur_sum - (cur_sum - sum) = sum
+                # each of those node_pre gives a path of desired sum
                 res += self.d[cur_sum - sum]               
-                self.d[cur_sum] += 1                    
+                # we update the counts for current sum
+                self.d[cur_sum] += 1                  
+                # try each child node, and update the number of paths from those 
                 res += DFS(node.left, cur_sum) + DFS(node.right, cur_sum)                
+                # before we go back to the parent node, we restore the previous count of current sum
                 self.d[cur_sum] -= 1    
+                # return all results from child nodes and current node to parent
                 return res
+            # if current node is none
             else:
+                # simply return 0
                 return 0
+        # start from the root, find all paths top-down, and collect results bottom-up
         return DFS(root, 0)
     
         # Solution 2 beats 45.39%： naive DFS

@@ -11,4 +11,8 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        # the transition from characters to spaces would be detected by comparing the string with its shifted version
+        #   abc d
+        #  abc d
+        # then count how many transitions there are
         return(sum([a != ' ' and b == ' ' for a, b in zip(s,s[1:]+' ')]))

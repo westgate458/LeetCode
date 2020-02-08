@@ -11,6 +11,7 @@ class AllOne(object):
         """
         Initialize your data structure here.
         """
+        # dictionary for all keys and counts
         self.d = {}
 
     def inc(self, key):
@@ -19,6 +20,7 @@ class AllOne(object):
         :type key: str
         :rtype: None
         """
+        # insert key or update its count
         if key in self.d:
             self.d[key] += 1
         else:
@@ -31,8 +33,10 @@ class AllOne(object):
         :type key: str
         :rtype: None
         """
+        # reduce the count of the key if it exists
         if key in self.d:
             self.d[key] -= 1
+            # remove the key if count drops to 0
             if self.d[key] == 0:
                 del self.d[key]
         
@@ -42,7 +46,10 @@ class AllOne(object):
         Returns one of the keys with maximal value.
         :rtype: str
         """
+        # res: the key with the max count
+        # max_v: the maximum count
         res, max_v = '', 0
+        # get the max key with O(n) time
         for key in self.d:
             if self.d[key] > max_v:
                 max_v, res = self.d[key], key
@@ -53,7 +60,10 @@ class AllOne(object):
         Returns one of the keys with Minimal value.
         :rtype: str
         """
+        # res: the key with the min count
+        # max_v: the minimum count
         res, min_v = '', float('inf')
+        # get the min key with O(n) time
         for key in self.d:
             if self.d[key] < min_v:
                 min_v, res = self.d[key], key
