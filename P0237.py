@@ -17,7 +17,12 @@ class Solution(object):
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
-        
+        # Solution 1 beats 97.02%: direct delete
         # 1) copy next value to current value
         # 2) delete next node
         node.val, node.next = node.next.val, node.next.next
+        
+        # Solution 2 beats 32.54%: shift values
+        while node.next.next:
+            node.val, node = node.next.val, node.next
+        node.val, node.next = node.next.val, None

@@ -11,7 +11,15 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """    
+        # Solution 1 beats 98.13%: using dictionary
+        d = {}
+        for i,num in enumerate(nums):
+            if target-num in d:
+                return([d[target-num],i])
+            else:
+                d[num] = i
         
+        # Solution 2 beats 27.00%: brute force search
         N_num = len(nums)        
         # brute force search
         for i in range(N_num-1):
