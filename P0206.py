@@ -18,7 +18,17 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # Solution 1 beats 97.21%: recursive
+        def DFS(n):   
+            tail = DFS(n.next) if n.next.next else n.next
+            n.next.next = n
+            return tail
+        if not head or not head.next:
+            return head
+        res, head.next = DFS(head), None
+        return res
         
+        # Solution 2 beats 88.78%: iterative
         # pre: previous node
         # p: current node
         pre, p = None, head 

@@ -19,6 +19,17 @@ class Solution(object):
         :rtype: ListNode
         """
         
+        # Solution 1 beats 90.97%: simplified
+        p = t = ListNode(None)
+        s = 0
+        while l1 or l2 or s:
+            if l1: s, l1 = s+l1.val,l1.next
+            if l2: s, l2 = s+l2.val,l2.next
+            p.next = ListNode(s%10)
+            p,s = p.next,s//10
+        return t.next
+    
+        # Solution 2 beats 44.43%: vanilla
         # from previous digit
         prev = 0
         # initialize the linked list

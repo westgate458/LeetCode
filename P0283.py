@@ -11,6 +11,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
+        # Solution 1 beats 99.58%: move to front directly
+        j = 0
+        for i, num in enumerate(nums):
+            if num != 0: nums[j], j = num, j+1
+        nums[j:] = [0] * (len(nums)-j)
+        
+        # Solution 2 beats 89.83%: move to back first
         # how many zeros before current number
         zeros = 0
         # check each number
