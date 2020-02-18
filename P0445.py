@@ -18,10 +18,12 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
+        # first convert numbers stored in list nodes to regular integers
         n1, p = 0, l1
         while p: n1, p = n1*10+p.val, p.next
         n2, p = 0, l2
         while p: n2, p = n2*10+p.val, p.next
+        # then calculate the sum, and create a new linked list to store the result
         p = t = ListNode(None)
         for c in str(n1+n2):
             p.next = ListNode(c)

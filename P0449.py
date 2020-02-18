@@ -13,6 +13,7 @@ Created on Mon Feb 17 22:56:23 2020
 #         self.right = None
 from collections import deque
 class Codec:
+    # Solution adapted from P0297
     def serialize(self, root):
         """Encodes a tree to a single string.
         :type root: TreeNode
