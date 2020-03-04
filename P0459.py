@@ -12,6 +12,7 @@ class Solution(object):
         :rtype: bool
         """
         # Solution 1 beats 89.94%: interesting observation
+        # somehow, this holds
         return s in (s+s)[1:-1]
     
         # Solution 2 beats 69.55%: check all possible substrings

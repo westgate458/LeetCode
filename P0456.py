@@ -12,11 +12,23 @@ class Solution(object):
         :rtype: bool
         """
         # Solution 1 beats 82.05%: stack with reversed sequence
+        # two: current fount 2 in the 132 pattern
+        # s: monotonically increasing stack, all numbers larger than current two, with current three as top
         two, s = float('-inf'), []        
+        # check each number from back to front
         for num in nums[::-1]:
+            # if current number is smaller than two, then we found the one
+            # since we have threes in the stack, a 132 pattern is found            
             if num < two: return True
+            # if the stack top (current 3) is smaller than current number
+            # then we better use the stack top as the new 2, and current number as 3
+            # since as long as we have 3 and 2 found, we want them as larget as possible
+            # so we can find 1 easilier for the 132 pattern
             while s and s[-1] < num: two = s.pop()
+            # now the stack top is larger than current number
+            # so push current number to stack, and it is the new three
             s.append(num)
+        # after all numbers are checked, no 132 pattern was found
         return False
     
         # Solution 2 beats 57.27%: stack with pre-calculated mins
