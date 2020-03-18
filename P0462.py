@@ -11,5 +11,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """          
+        # find the median after sorting
         median = sorted(nums)[len(nums)//2] 
+        # min number of moves is by bringing each number to the median value
         return(sum([abs(num-median) for num in nums]))

@@ -12,8 +12,9 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
+        # c: compare each bit by xor
+        # res: number of different 
         c, res = x^y, 0        
-        while c:
-            res += (c & 1)
-            c >>= 1
+        # count how many bits of c is 1
+        while c: res, c = res+(c&1), c>>1
         return res
