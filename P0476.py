@@ -11,10 +11,16 @@ class Solution(object):
         :type num: int
         :rtype: int
         """
+        # bits: from binary representation
+        # res: final complement
         bits, res = [], 0
-        while num:            
+        # take each bit from binary representation
+        while num:    
+            # take current lowest bit
             bits.append(1 - (num&1))
+            # right shift by 1
             num >>= 1 
+        # compose the complement in reversed order
         for bit in bits[::-1]: 
             res = (res<<1) + bit 
         return res

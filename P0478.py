@@ -22,8 +22,12 @@ class Solution(object):
         :rtype: List[float]
         """
         # Solution 1 beats 82.81%: generate any distrubution from uniform distribution
+        # generate uniform distribution in radius
         r = self.r * random.random()**0.5        
-        a = random.random() * 360.0     
+        # generate uniform distribution in angle
+        a = random.random() * 360.0   
+        # for each finite element of r*dr*da, its probability is 1/(pi*r^2)
+        # return the coordinates
         return([self.x+r*math.cos(a),self.y+r*math.sin(a)])
         
         # Solution 2 beats 70.31%: reject sampling

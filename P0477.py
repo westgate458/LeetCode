@@ -11,7 +11,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """    
-        # Solution 1 beats 96.45%: one-liner        
+        # Solution 1 beats 96.45%: one-liner     
+        # steps:
+        # 1) convert each number to 32-bit binary string
+        # 2) transpose the list of strings, so each row is now the same bit
+        # 3) for each bit, count how many 0s and 1s are there
+        # 4) the total hamming distance of this bit is the product of the counts
+        # 5) sum up the hamming distance for all bits
         return(sum([b.count('0')*b.count('1') for b in zip(*map('{:032b}'.format, nums))]))
         
         # Solution 2 beats 54.61%: same approach, different implementation
