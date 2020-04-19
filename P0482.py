@@ -12,10 +12,14 @@ class Solution(object):
         :type K: int
         :rtype: str
         """
-        
+        # first remove all '-', and convert to upper case
         S = ''.join(S.split('-')).upper()
-        l = len(S)
-        a, b = divmod(l,K)        
-        res = [S[:b]]
-        for idx in xrange(b,l,K): res.append(S[idx:idx+K])
-        return('-'.join(res).lstrip('-'))
+        # length of all characters
+        l = len(S)        
+        # see if we have remains after K-units
+        b = l%K
+        # steps:
+        # 1) split the string by K-units
+        # 2) join by '-'
+        # 3) remove leading '-' if there is
+        return('-'.join([S[:b]] + [S[idx:idx+K] for idx in xrange(b,l,K)]).lstrip('-'))    

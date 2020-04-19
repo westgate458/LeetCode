@@ -13,15 +13,26 @@ class Solution(object):
         """        
         
         # Solution 1 beats 99.47%: bottom-up dp
+        # number of numbers
         n = len(nums)
+        # dp[start][end] = (my sum, opponent sum)
         dp = [[0]*n for _ in xrange(n)]        
+        # base cases: segments of length 1, winner's sum is current number
         for i in range(n): dp[i][i] = (nums[i],0)
+        # build dp array of length short to long        
         for l in range(2,n+1):
+            # start point of each segment
             for i in range(n-l+1):
+                # end point of each segment
                 j = i + l - 1
+                # build current dp from two dp's of 1 number shorter
                 sl1, sl2 = dp[i+1][j] 
                 sr1, sr2 = dp[i][j-1]
-                dp[i][j] = (nums[i] + sl2, sl1) if nums[i] + sl2 >= nums[j] + sr2 else (nums[j] + sr2, sr1)                            
+                # winner of current segment is the one from the two
+                # 1) nums[i] + opponent from segment [i+1] to [j] 
+                # 2) nums[j] + opponent from segment [i] to [j-1]
+                dp[i][j] = (nums[i] + sl2, sl1) if nums[i] + sl2 >= nums[j] + sr2 else (nums[j] + sr2, sr1)       
+        # I can win if my sum is larger than opponent's                     
         return dp[0][-1][0] >= dp[0][-1][1]
         
         # Solution 2 beats 47.34%: top-bottom dp
