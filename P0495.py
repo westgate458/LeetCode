@@ -13,13 +13,24 @@ class Solution(object):
         :rtype: int
         """     
         # Solution 1 beats 100%: fewer additions
+        # t0: start of current intoxication
+        # t1: end of current intoxication
+        # res: total duration of intoxication
         t0, t1, res = -1, -1, 0       
+        # check each attack time point, add inf at end so the last intoxication definitely ends
         for t in timeSeries + [float('inf')]:
+            # if current time is before the end of current intoxication
             if t < t1:
+                # current attack simply extend current intoxication
                 t1 = t + duration
+            # if current time is before the end of previous intoxication
             else:
+                # previous intoxication has ended, start a new one
+                # update total duration
                 res += t1 - t0
+                # update start and end time
                 t0, t1 = t, t + duration                
+        # total duration of intoxication
         return res
     
         # Solution 2 beats 89.13%: one-liner
