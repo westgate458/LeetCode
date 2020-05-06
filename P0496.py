@@ -12,8 +12,15 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        d, s = {}, [float('inf')]        
+        # d: next greater element for each number in nums2
+        # s: monotonically decreasing stack
+        d, s = {}, [float('inf')]    
+        # for each number in nums2, find all numbers before it that is smaller
         for n in nums2:
+            # keep popping the stack, until the last element is not smaller than current number
+            # for each popped number, current number is the next greater element for it
             while s[-1] < n: d[s.pop()] = n
+            # push current number into stack
             s.append(n)              
+        # for each number in nums1, now retreive its next greater element from d
         return [d.get(n, -1) for n in nums1]
