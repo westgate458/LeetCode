@@ -2,7 +2,7 @@
 """
 Created on Sat Mar  2 15:09:16 2019
 
-@author: Administrator
+@author: Tianqi Guo
 """
 class Solution(object):
     def grayCode(self, n):
