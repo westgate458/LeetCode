@@ -12,7 +12,10 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """               
-     
+		
+		# for BST, in-order traversal gives the sorted list of all nodes
+		# find the mode in the sorted list is trivial
+		
         pre, count, max_count = float('inf'), 1, -1
         p, s, res = root, [], []      
         
@@ -20,7 +23,11 @@ class Solution(object):
             if p:                  
                 s.append(p)                           
                 p = p.left
-            else:                    
+            else:              
+				# when a None node is encountered, we need to go back to previous node
+				# for the previous node, accessing its value is 'in-order' traversal since
+				# all of its left subtree has been accessed already
+				# now check if it has appeared more the the mode
                 if s[-1].val == pre:
                     count += 1
                 else:

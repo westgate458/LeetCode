@@ -9,8 +9,14 @@ class Solution(object):
         :rtype: int
         """       
 		# Solution 1 beats 100%: heap
+		# trivial case: all projects can be done
         if W >= max(Capital):
             return W+sum(sorted(Profits,reverse=True)[:k])  
+		# since total capital never decreases
+		# once total capital exceeds the capital requirement of one project
+		# this project could be done at any time
+		# use a heap to collect all projects that has capital below current total capital
+		# and each time proceed with the one that has highest profit -> greedy
         t = sorted(zip(Capital, Profits),reverse=True) 
         heap = []        
         for _ in range(k):            
