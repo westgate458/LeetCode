@@ -10,6 +10,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+		# level order traversal
         s = [root]        
         while s:
             ans = s[0].val            

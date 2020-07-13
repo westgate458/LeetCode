@@ -1,6 +1,6 @@
 import random
 class Solution(object):
-
+	# use hash table to map already-appeared elements to their alternatives
     def __init__(self, n_rows, n_cols):
         """
         :type n_rows: int

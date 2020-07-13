@@ -10,6 +10,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
+		# level order traversal
         if not root: return []
         res, s = [], [root]             
         while s:

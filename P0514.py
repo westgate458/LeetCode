@@ -6,6 +6,7 @@ class Solution(object):
         :rtype: int
         """        
 		# Solution 1 beats 87.04%: straight DP
+		# each time a new character is added to the key, the minimum of ops only depends on previous character
         self.ps, l_ring, dp = defaultdict(list), len(ring), [(0,0)]
         for p, r in enumerate(ring): self.ps[r].append(p)
         for c in key: dp = [(p,min([min(cost+abs(pos-p),cost+l_ring-abs(pos-p)) for pos, cost in dp])+1) for p in self.ps[c]]           

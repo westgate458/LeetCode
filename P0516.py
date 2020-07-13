@@ -4,6 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+		# build from shorter lengths towards longer lengths
         if s == s[::-1]: return len(s)
         l = len(s)
         dp = [[1] * l for _ in range(l)] 
