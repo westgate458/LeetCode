@@ -1,3 +1,4 @@
+//basic string manipulation
 class Solution {
 public:
     bool checkRecord(string s) {        
