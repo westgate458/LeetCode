@@ -1,5 +1,5 @@
 class MyCircularDeque(object):
-
+	# simply use a list
     def __init__(self, k):
         """
         Initialize your data structure here. Set the size of the deque to be k.
