@@ -10,6 +10,7 @@
  * };
  */
 class Solution {
+// gather all values and sort
 public:
     
     vector<int> gather(TreeNode* root) {
@@ -35,8 +36,7 @@ public:
         int c = 0;
         int pre = -1;
         int res = -1;
-        for (auto n : nums) {
-            //cout << n << ' ' << endl;
+        for (auto n : nums) {            
             if (n!=pre) {
                 c += 1;
                 pre = n;
